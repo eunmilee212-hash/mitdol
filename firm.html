@@ -9,6 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      'IntersectionObserver' in window) document.documentElement.className += ' anim';
+</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -32,11 +37,11 @@
   </div>
 
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>평가 · 검토</h2>
       <p>기준서·법령 조문이 조서에 함께 찍힙니다. 규격 문서의 불변식은 테스트로 강제됩니다.</p>
     </div>
-    <div class="items">
+    <div class="items rise">
       <div class="item">
         <div class="nm">비상장주식 평가<span class="sub">상속·증여</span></div>
         <div class="ds"><span class="pill law">상증세법 시행령 §54</span> 순손익가치·순자산가치 가중, 자본거래 환산, 예외 판정. 외감법인은 DART 에서 3년 순이익과 자본총계를 자동으로 채웁니다.</div>
@@ -73,11 +78,11 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>정산 · 대사</h2>
       <p>건수가 많고 형식이 정해진 반복 업무입니다. 건당 시간이 곧 비용입니다.</p>
     </div>
-    <div class="items">
+    <div class="items rise">
       <div class="item">
         <div class="nm">사업비 정산 검토<span class="sub">국고보조 · R&amp;D</span></div>
         <div class="ds">집행내역을 넣으면 이중집행을 검출하고, 한도 인정액을 차감해 반납액을 산정합니다. 사업별 사용기준은 규칙으로 입력합니다.</div>
@@ -90,8 +95,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead"><h2>어떻게 쓰나</h2></div>
-    <div class="steps">
+    <div class="sechead rise"><h2>어떻게 쓰나</h2></div>
+    <div class="steps rise">
       <div class="step">
         <h3>설치</h3>
         <p>압축 파일을 풀고 실행 파일을 더블클릭합니다. 사무소 PC 한 대에 설치하면 브라우저로 씁니다. 서버·계정·클라우드가 없습니다.</p>
@@ -117,5 +122,20 @@
   <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
+<script>
+/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.rise'));
+  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
+  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  els.forEach(function (e) { io.observe(e); });
+  setTimeout(showAll, 1500);
+})();
+</script>
 </body>
 </html>

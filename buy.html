@@ -8,6 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      'IntersectionObserver' in window) document.documentElement.className += ' anim';
+</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -31,11 +36,11 @@
   </div>
 
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>가격</h2>
       <p>사무소·법인 단위, 사용자 수 제한 없음, 1년. 갱신 시 이월 자료가 그대로 유지됩니다. 팀장 전결 한도 아래로 잡았습니다.</p>
     </div>
-    <div class="table-scroll"><table class="grid">
+    <div class="table-scroll rise"><table class="grid">
       <thead><tr><th>줄</th><th>포함</th><th class="r">연 라이선스</th></tr></thead>
       <tbody>
         <tr>
@@ -59,7 +64,7 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>체험판</h2>
       <p>기간 제한이 있는 실행 파일을 메일로 보냅니다. 「샘플 자료로 둘러보기」는 기간 없이 쓸 수 있고, 실제 자료는 체험 기간 안에 돌려 보십시오.</p>
     </div>
@@ -69,8 +74,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead"><h2>결제 · 세금계산서</h2></div>
-    <div class="items">
+    <div class="sechead rise"><h2>결제 · 세금계산서</h2></div>
+    <div class="items rise">
       <div class="item">
         <div class="nm">계좌이체</div>
         <div class="ds"><span class="todo">은행 · 계좌번호 · 예금주</span></div>
@@ -83,8 +88,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead"><h2>자주 묻는 것</h2></div>
-    <div class="items">
+    <div class="sechead rise"><h2>자주 묻는 것</h2></div>
+    <div class="items rise">
       <div class="item">
         <div class="nm">자료가 밖으로 나갑니까?</div>
         <div class="ds">아닙니다. 서버가 없습니다. 도구는 사용자 PC 에서 돌고 업로드 파일은 그 PC 폴더에만 저장됩니다. 외부 통신을 하는 기능은 선택 기능(DART 조회 등)에 한정되고, 꺼도 나머지는 그대로 돕니다.</div>
@@ -109,5 +114,20 @@
   <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
+<script>
+/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.rise'));
+  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
+  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  els.forEach(function (e) { io.observe(e); });
+  setTimeout(showAll, 1500);
+})();
+</script>
 </body>
 </html>

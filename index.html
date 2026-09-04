@@ -9,6 +9,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      'IntersectionObserver' in window) document.documentElement.className += ' anim';
+</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -24,64 +29,78 @@
 </div></header>
 
 <main>
-  <div class="wrap">
-    <div class="hero">
-      <span class="eyebrow">회계사가 만든 실무 도구</span>
-      <h1>계산은 도구가 합니다.<br><em>서명은 전문가가 합니다.</em></h1>
-      <p class="lead">회계법인·기업 재무팀·계리사가 매 분기 되풀이하는 평가·대사·공시 업무를 <b>사용자의 PC 안에서</b> 끝냅니다. 명부·거래처·재무 자료는 PC 밖으로 나가지 않고, 모든 계산에는 근거 조문이 붙은 조서가 남습니다.</p>
+  <div class="dark">
+    <div class="wrap">
+      <div class="hero">
+        <span class="eyebrow">회계사가 만든 실무 도구</span>
+        <h1>계산은 도구가 합니다.<br><em>서명은 전문가가 합니다.</em></h1>
+        <p class="lead">회계법인·기업 재무팀·계리사가 매 분기 되풀이하는 평가·대사·공시 업무를 <b>사용자의 PC 안에서</b> 끝냅니다. 명부·거래처·재무 자료는 PC 밖으로 나가지 않고, 모든 계산에는 근거 조문이 붙은 조서가 남습니다.</p>
 
-      <div class="shot">
-        <div class="bar">
-          <i></i><i></i><i></i>
-          <span>부가세 매입매출 대사 — 2024년 1기 예정, 샘플 자료</span>
-        </div>
-        <div class="body">
-          <div class="kpis">
-            <div class="kpi hot">
-              <div class="k">세액 영향</div>
-              <div class="v num">16,427,100<span class="u">원</span></div>
+        <div class="overlap">
+          <div class="shot">
+            <div class="bar">
+              <i></i><i></i><i></i>
+              <span>부가세 매입매출 대사 — 2024년 1기 예정, 샘플 자료</span>
             </div>
-            <div class="kpi">
-              <div class="k">가산세 노출</div>
-              <div class="v num">1,319,740<span class="u">원</span></div>
+            <div class="body">
+              <div class="kpis">
+                <div class="kpi hot">
+                  <div class="k">세액 영향</div>
+                  <div class="v num">16,427,100<span class="u">원</span></div>
+                </div>
+                <div class="kpi">
+                  <div class="k">가산세 노출</div>
+                  <div class="v num">1,319,740<span class="u">원</span></div>
+                </div>
+                <div class="kpi">
+                  <div class="k">불일치</div>
+                  <div class="v num">25<span class="u">건</span></div>
+                </div>
+                <div class="kpi">
+                  <div class="k">매칭</div>
+                  <div class="v num">121<span class="u">/126건</span></div>
+                </div>
+              </div>
+              <div class="table-scroll"><table class="grid">
+                <thead><tr>
+                  <th>불일치 유형</th><th>심각도</th><th class="r">건수</th>
+                  <th class="r">세액 영향</th><th class="r">가산세</th><th>근거</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td>장부 미계상</td><td><span class="pill high">높음</span></td><td class="r num">5</td><td class="r num">5,266,900</td><td class="r num">0</td><td><span class="pill law">§39①2</span></td></tr>
+                  <tr><td>홈택스 미확인</td><td><span class="pill high">높음</span></td><td class="r num">4</td><td class="r num">3,543,000</td><td class="r num">459,520</td><td><span class="pill law">국기법 §47의3</span></td></tr>
+                  <tr><td>지연발행</td><td><span class="pill high">높음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">465,150</td><td><span class="pill law">§60②1</span></td></tr>
+                  <tr><td>중복 계상</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">1,170,800</td><td class="r num">0</td><td></td></tr>
+                  <tr><td>기간귀속 오류</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">833,700</td><td class="r num">0</td><td></td></tr>
+                  <tr><td>사업자번호 오류</td><td><span class="pill mid">중간</span></td><td class="r num">2</td><td class="r num">5,522,700</td><td class="r num">0</td><td></td></tr>
+                  <tr><td>금액 상이</td><td><span class="pill mid">중간</span></td><td class="r num">3</td><td class="r num">90,000</td><td class="r num">395,070</td><td><span class="pill law">§60②5</span></td></tr>
+                  <tr><td>일자 상이</td><td><span class="pill low">낮음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">0</td><td></td></tr>
+                  <tr class="total"><td>합계</td><td></td><td class="r num">25</td><td class="r num">16,427,100</td><td class="r num">1,319,740</td><td></td></tr>
+                </tbody>
+              </table></div>
             </div>
-            <div class="kpi">
-              <div class="k">불일치</div>
-              <div class="v num">25<span class="u">건</span></div>
-            </div>
-            <div class="kpi">
-              <div class="k">매칭</div>
-              <div class="v num">121<span class="u">/126건</span></div>
-            </div>
+            <div class="cap">실제 산출 화면입니다. 샘플 자료에 오류 9종을 심어 두었고, 도구가 그것을 유형별로 분류해 금액으로 환산했습니다. 합계 아래 두 줄은 회계 장부의 그 두 줄입니다.</div>
           </div>
-          <div class="table-scroll"><table class="grid">
-            <thead><tr>
-              <th>불일치 유형</th><th>심각도</th><th class="r">건수</th>
-              <th class="r">세액 영향</th><th class="r">가산세</th><th>근거</th>
-            </tr></thead>
-            <tbody>
-              <tr><td>장부 미계상</td><td><span class="pill high">높음</span></td><td class="r num">5</td><td class="r num">5,266,900</td><td class="r num">0</td><td><span class="pill law">§39①2</span></td></tr>
-              <tr><td>홈택스 미확인</td><td><span class="pill high">높음</span></td><td class="r num">4</td><td class="r num">3,543,000</td><td class="r num">459,520</td><td><span class="pill law">국기법 §47의3</span></td></tr>
-              <tr><td>지연발행</td><td><span class="pill high">높음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">465,150</td><td><span class="pill law">§60②1</span></td></tr>
-              <tr><td>중복 계상</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">1,170,800</td><td class="r num">0</td><td></td></tr>
-              <tr><td>기간귀속 오류</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">833,700</td><td class="r num">0</td><td></td></tr>
-              <tr><td>사업자번호 오류</td><td><span class="pill mid">중간</span></td><td class="r num">2</td><td class="r num">5,522,700</td><td class="r num">0</td><td></td></tr>
-              <tr><td>금액 상이</td><td><span class="pill mid">중간</span></td><td class="r num">3</td><td class="r num">90,000</td><td class="r num">395,070</td><td><span class="pill law">§60②5</span></td></tr>
-              <tr><td>일자 상이</td><td><span class="pill low">낮음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">0</td><td></td></tr>
-            </tbody>
-          </table></div>
         </div>
-        <div class="cap">실제 산출 화면입니다. 샘플 자료에 오류 9종을 심어 두었고, 도구가 그것을 유형별로 분류해 금액으로 환산했습니다. 「샘플 자료로 둘러보기」로 직접 확인하실 수 있습니다.</div>
       </div>
     </div>
   </div>
 
+  <div class="wrap after-overlap">
+    <div class="proof rise">
+      <div><div class="v">14<span>종</span></div><div class="k">평가·대사·공시 도구</div></div>
+      <div><div class="v">374<span>건</span></div><div class="k">규격 테스트 · 전부 통과</div></div>
+      <div><div class="v">0<span>대</span></div><div class="k">서버 · 자료가 PC 를 안 떠난다</div></div>
+      <div><div class="v">38,118<span>곳</span></div><div class="k">DART 업종 인덱스</div></div>
+    </div>
+  </div>
+
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>누가 씁니까</h2>
       <p>사는 사람에 따라 파는 물건과 설치 방식이 다릅니다. 해당하는 줄로 들어가십시오.</p>
     </div>
-    <div class="doors">
+    <div class="doors rise">
       <a class="door" href="firm.html">
         <span class="n">01</span>
         <h3>회계법인 · 세무사무소</h3>
@@ -104,11 +123,11 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead">
+    <div class="sechead rise">
       <h2>세 가지 원칙</h2>
       <p>기존 회계 프로그램과 경쟁하지 않습니다. 그 프로그램이 하지 않는, 전문가가 손으로 하던 자리만 맡습니다.</p>
     </div>
-    <div class="rules">
+    <div class="rules rise">
       <div class="rule">
         <span class="n">01</span>
         <h3>자료가 나가지 않는다</h3>
@@ -128,7 +147,7 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="callout">
+    <div class="callout rise">
       <h2>먼저 무료 계산기로 확인해 보십시오</h2>
       <p>세금계산서 가산세를 §60⑨ 중복배제까지 적용해 계산합니다. 과소신고·납부지연·수정신고 감면도 함께 냅니다. 로그인도 수집도 없고, 페이지가 규격 정답지로 스스로 검산합니다.</p>
       <div class="actions">
@@ -143,5 +162,21 @@
   <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
+
+<script>
+/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.rise'));
+  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
+  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  els.forEach(function (e) { io.observe(e); });
+  setTimeout(showAll, 1500);
+})();
+</script>
 </body>
 </html>

@@ -30,6 +30,13 @@
   --shadow-md: 0 4px 16px rgba(15,23,42,.06);
   --shadow-lg: 0 12px 40px rgba(15,23,42,.08);
 
+  /* 어두운 면 — 히어로·강조 배너. 밝은 면과 겹쳐 제품 카드를 경계에 걸친다 */
+  --dark:      #0B2942;
+  --dark-2:    #0A3D62;
+  --dark-line: rgba(255,255,255,.09);
+  --on-dark:   #E2ECF4;
+  --on-dark-2: #9FBBD0;
+
   --max: 1080px;
   --sans: 'IBM Plex Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
           'Malgun Gothic', system-ui, sans-serif;
@@ -55,56 +62,80 @@ a:hover { text-decoration: underline; }
 
 /* ── 헤더 ───────────────────────────────────────────────── */
 header.top {
-  background: rgba(255,255,255,.86);
-  backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--line);
+  background: rgba(11,41,66,.88);            /* 어두운 히어로와 이어지도록 */
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
   position: sticky; top: 0; z-index: 50;
 }
 header.top .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
 .brand {
-  font-weight: 700; font-size: 17px; letter-spacing: -.02em; color: var(--ink);
+  font-weight: 700; font-size: 17px; letter-spacing: -.02em; color: #fff;
   display: flex; align-items: center; gap: 9px;
 }
 .brand::before {
   content: ''; width: 9px; height: 22px; border-radius: 2px; flex: none;
-  background: linear-gradient(180deg, var(--brand) 0%, var(--brand-2) 100%);
+  background: linear-gradient(180deg, #7FB3D5 0%, #2E7DB0 100%);
 }
 .brand:hover { text-decoration: none; }
 nav.main { display: flex; align-items: stretch; gap: 22px; font-size: 14.5px; margin-left: auto; align-self: stretch; }
 /* 링크를 헤더 높이만큼 늘려 밑줄이 아래 경계선에 정확히 붙게 한다 (떠 있으면 어긋나 보인다) */
 nav.main a {
-  color: var(--ink-3); font-weight: 500; position: relative;
+  color: var(--on-dark-2); font-weight: 500; position: relative;
   display: flex; align-items: center;
 }
-nav.main a:hover { color: var(--ink); text-decoration: none; }
-nav.main a.on { color: var(--brand); font-weight: 600; }
+nav.main a:hover { color: #fff; text-decoration: none; }
+nav.main a.on { color: #fff; font-weight: 600; }
 nav.main a.on::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--brand);
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: #7FB3D5;
 }
 nav.main a.cta {
-  background: var(--brand); color: #fff; padding: 8px 16px; border-radius: var(--r-sm);
+  background: #fff; color: var(--dark); padding: 8px 16px; border-radius: var(--r-sm);
   font-weight: 600; box-shadow: var(--shadow-sm); align-self: center;
 }
-nav.main a.cta:hover { background: var(--brand-2); color: #fff; }
+nav.main a.cta:hover { background: #DCE9F2; color: var(--dark); }
 nav.main a.cta::after { display: none; }
 
-/* ── 히어로 ─────────────────────────────────────────────── */
-.hero { padding: 88px 0 56px; }
+/* ── 히어로 (어두운 면 + 장부 괘선) ────────────────────── */
+.dark {
+  background: var(--dark);
+  /* 장부 괘선 — 32px 간격 가로줄. 아래로 갈수록 옅어진다 */
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 31px, var(--dark-line) 31px 32px),
+    radial-gradient(120% 80% at 15% 0%, rgba(14,90,138,.55) 0%, transparent 60%);
+  color: var(--on-dark);
+  position: relative;
+}
+.dark::after {                       /* 아래쪽에서 괘선을 서서히 지운다 */
+  content: ''; position: absolute; inset: auto 0 0 0; height: 260px;
+  background: linear-gradient(to bottom, transparent, var(--dark)); pointer-events: none;
+}
+.dark > * { position: relative; z-index: 1; }
+
+.hero { padding: 96px 0 0; }
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;
-  color: var(--brand); background: var(--brand-soft); padding: 6px 13px;
-  border-radius: 999px; letter-spacing: -.01em; margin-bottom: 22px;
+  display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600;
+  color: var(--on-dark); background: rgba(255,255,255,.08); padding: 7px 14px;
+  border: 1px solid var(--dark-line); border-radius: 999px;
+  letter-spacing: .01em; margin-bottom: 26px;
+}
+.eyebrow::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(18,185,129,.22);
 }
 .hero h1 {
-  font-size: 52px; font-weight: 700; line-height: 1.18; letter-spacing: -.035em;
-  color: var(--ink); margin-bottom: 22px;
+  font-size: 60px; font-weight: 700; line-height: 1.16; letter-spacing: -.042em;
+  color: #fff; margin-bottom: 26px;
 }
-.hero h1 em { font-style: normal; color: var(--brand); }
-.hero .lead { font-size: 19px; color: var(--ink-3); max-width: 660px; line-height: 1.65; }
-.hero .lead b { color: var(--ink-2); font-weight: 600; }
+.hero h1 em { font-style: normal; color: #7FB3D5; }
+.hero .lead { font-size: 19px; color: var(--on-dark-2); max-width: 640px; line-height: 1.7; }
+.hero .lead b { color: #fff; font-weight: 600; }
+
+/* 어두운 면 위 밝은 면 — 제품 카드가 경계에 걸치게 (Stripe·Linear 구성) */
+.overlap { margin-top: 56px; margin-bottom: -140px; }
+.after-overlap { padding-top: 172px; }
 
 /* 페이지 제목(하위 페이지) */
-.pagehead { padding: 72px 0 40px; border-bottom: 1px solid var(--line); }
+.pagehead { padding: 76px 0 44px; border-bottom: 1px solid var(--line); }
 .pagehead h1 { font-size: 40px; font-weight: 700; letter-spacing: -.03em; color: var(--ink); margin-bottom: 16px; }
 .pagehead .lead { font-size: 17.5px; color: var(--ink-3); max-width: 720px; }
 
@@ -112,6 +143,10 @@ nav.main a.cta::after { display: none; }
 .shot {
   margin-top: 52px; background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--r-lg); box-shadow: var(--shadow-lg); overflow: hidden;
+}
+.overlap .shot {
+  margin-top: 0;
+  box-shadow: 0 30px 70px -20px rgba(4,20,35,.55), 0 0 0 1px rgba(255,255,255,.06);
 }
 .shot .bar {
   display: flex; align-items: center; gap: 8px; padding: 12px 18px;
@@ -155,12 +190,46 @@ table.grid tbody tr:hover td { background: #FAFBFC; }
 .pill.law  { background: #F1F5F9; color: var(--ink-3); font-family: var(--mono); font-size: 11px; font-weight: 500; }
 .pill.soon { background: var(--warning-soft); color: #B45309; }
 
+/* ── 장부의 두 줄 (합계 아래 긋는 그 줄) — 이 사이트의 서명 ── */
+.dbl { border-bottom: 3px double var(--ink-3); }
+table.grid tr.total td { border-bottom: 3px double var(--ink); font-weight: 700; color: var(--ink); }
+table.grid tr.total:hover td { background: transparent; }
+.sechead h2 { position: relative; display: inline-block; padding-bottom: 12px; }
+.sechead h2::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 34px; height: 0;
+  border-bottom: 3px double var(--brand);
+}
+
+/* ── 증명 숫자 띠 ───────────────────────────────────────── */
+.proof {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.proof div { padding: 26px 24px; border-left: 1px solid var(--line); }
+.proof div:first-child { border-left: 0; padding-left: 0; }
+.proof .v {
+  font-family: var(--mono); font-size: 30px; font-weight: 600; color: var(--ink);
+  letter-spacing: -.03em; line-height: 1.2;
+}
+.proof .v span { font-size: 15px; color: var(--ink-3); font-family: var(--sans); margin-left: 3px; }
+.proof .k { font-size: 13.5px; color: var(--muted); margin-top: 7px; }
+
 /* ── 섹션 ───────────────────────────────────────────────── */
 section { padding: 72px 0; }
 section + section { border-top: 1px solid var(--line); }
-.sechead { margin-bottom: 32px; max-width: 720px; }
-.sechead h2 { font-size: 29px; font-weight: 700; letter-spacing: -.028em; color: var(--ink); margin-bottom: 12px; }
+.sechead { margin-bottom: 36px; max-width: 700px; }
+.sechead h2 { font-size: 32px; font-weight: 700; letter-spacing: -.032em; color: var(--ink); margin-bottom: 14px; }
 .sechead p { font-size: 16.5px; color: var(--ink-3); }
+
+/* 스크롤 등장 — 아주 약하게.
+   ★ 기본값은 '보임'이다. JS 가 살아 있을 때만 숨긴다(html.anim).
+     관찰자가 안 돌거나 JS 가 죽으면 내용이 그냥 보인다 — 안 보이는 것이 최악이다. */
+.rise { transition: opacity .5s ease, transform .5s ease; }
+html.anim .rise { opacity: 0; transform: translateY(14px); }
+html.anim .rise.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.anim .rise { opacity: 1; transform: none; transition: none; }
+}
 
 /* 고객군 입구 — 큰 카드 */
 .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -213,16 +282,21 @@ section + section { border-top: 1px solid var(--line); }
 
 /* 강조 배너 */
 .callout {
-  background: var(--brand); color: #fff; border-radius: var(--r-lg);
-  padding: 38px 40px; box-shadow: var(--shadow-md);
+  background: var(--dark); color: #fff; border-radius: var(--r-lg);
+  padding: 44px 44px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 31px, var(--dark-line) 31px 32px),
+    radial-gradient(90% 120% at 100% 0%, rgba(14,90,138,.5) 0%, transparent 62%);
 }
+.callout > * { position: relative; z-index: 1; }
 .callout h2 { font-size: 26px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 12px; color: #fff; }
 .callout p { font-size: 16.5px; color: #C7DDEC; max-width: 620px; }
 .callout .actions { margin-top: 24px; }
 .callout .btn.solid { background: #fff; color: var(--brand); border-color: #fff; }
 .callout .btn.solid:hover { background: #EAF2F8; }
-.callout .btn.ghost { border-color: rgba(255,255,255,.35); color: #fff; }
-.callout .btn.ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+/* .btn 기본 배경이 흰색이라 어두운 면에서 흰 글씨가 묻힌다. 배경을 반드시 지운다 */
+.callout .btn.ghost { border-color: rgba(255,255,255,.38); color: #fff; background: transparent; }
+.callout .btn.ghost:hover { border-color: #fff; background: rgba(255,255,255,.10); }
 
 .note {
   background: var(--warning-soft); border: 1px solid #FDE68A; color: #92400E;
@@ -319,8 +393,14 @@ article.post b { font-weight: 600; color: var(--ink); }
   .item { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 640px) {
-  .hero { padding: 56px 0 40px; }
-  .hero h1 { font-size: 34px; }
+  .hero { padding: 56px 0 0; }
+  .hero h1 { font-size: 34px; letter-spacing: -.035em; }
+  .overlap { margin-top: 36px; margin-bottom: -100px; }
+  .after-overlap { padding-top: 124px; }
+  .proof { grid-template-columns: repeat(2, 1fr); }
+  .proof div { border-left: 0; border-top: 1px solid var(--line); padding: 18px 0; }
+  .proof div:first-child, .proof div:nth-child(2) { border-top: 0; }
+  .proof .v { font-size: 24px; }
   .hero .lead { font-size: 17px; }
   .pagehead h1 { font-size: 30px; }
   .sechead h2 { font-size: 24px; }
