@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회계법인·세무사무소용 도구 — 평가·정산·대사</title>
+<meta name="description" content="비상장주식·영업권 손상·스톡옵션·RSU·RCPS·양도소득세·이전가격 평가와 사업비 정산, 고객사 부가세 대사. 회계사가 검토하고 서명하는 조서를 만드는 도구.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html"><span class="todo">회사명</span></a>
+  <nav class="main">
+    <a href="index.html">홈</a>
+    <a class="on" href="firm.html">회계법인용</a>
+    <a href="finance.html">기업 재무팀용</a>
+    <a href="actuary.html">계리사용</a>
+    <a href="free/">무료 도구</a>
+    <a class="cta" href="buy.html">구매·문의</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>회계법인 · 세무사무소</h1>
+    <p class="lead">한 사무소가 연간 수십 건씩 하는 평가·정산·대사 업무입니다. 입력을 넣으면 계산과 조서(.docx)가 나오고, 회계사는 검토하고 서명합니다. 작년 건의 가정과 결과는 이월되어 올해 건의 출발점이 됩니다.</p>
+  </div>
+
+  <section>
+    <h2>평가 · 검토</h2>
+    <p class="sub">기준서·법령 조문이 조서에 함께 찍힙니다. 규격의 불변식은 테스트로 강제됩니다.</p>
+    <div class="table-scroll"><table class="plain">
+      <thead><tr><th>도구</th><th>근거</th><th>무엇을 하나</th></tr></thead>
+      <tbody>
+        <tr><td><b>비상장주식 평가</b></td><td><span class="tag law">상증세법 시행령 §54</span></td><td>상속·증여 건. 순손익가치·순자산가치 가중, 자본거래 환산, 예외 판정. DART 자동채움(외감법인).</td></tr>
+        <tr><td><b>영업권 손상검사</b></td><td><span class="tag law">K-IFRS 1036</span></td><td>사용가치 산정(세전/세후 강제), §105 반복 배분, 손상 임계값. 감사 대응 산출물.</td></tr>
+        <tr><td><b>스톡옵션 · RSU</b></td><td><span class="tag law">K-IFRS 1102</span></td><td>Black-Scholes·이항모형, 가득조건별 비용 인식 스케줄, 기간별 재추정(true-up). 시장조건 반영 위치가 조서에 남습니다.</td></tr>
+        <tr><td><b>RCPS · 전환사채</b></td><td><span class="tag law">K-IFRS 1032 · 1109</span></td><td>부채/자본 분류 판정, 잔여법, 상각표. 리픽싱 유무에 따라 전환권 평가 게이트.</td></tr>
+        <tr><td><b>퇴직급여 DBO 검토</b> <span class="tag">감사인용</span></td><td><span class="tag law">K-IFRS 1019</span></td><td>회사가 받은 계리보고서를 감사인이 재계산·검토하는 용도. 민감도·듀레이션·만기분석. 본평가는 <a href="actuary.html">계리사용</a>을 보십시오.</td></tr>
+        <tr><td><b>양도소득세</b></td><td><span class="tag law">소득세법 §89·95·97·103·104</span></td><td>취득가액 방식 게이트(실지/환산), 장기보유특별공제 표 판정, 주택 수. 갈래에 맞지 않는 입력은 "무시했다"고 조서에 적습니다.</td></tr>
+        <tr><td><b>이전가격 TP</b></td><td><span class="tag law">국조법 시행령 §14 · §15</span></td><td>비교대상 사분위(3방식), 다년도 가중, 운전자본 조정. DART 업종 인덱스 38,118개로 비교대상 후보를 찾습니다.</td></tr>
+        <tr><td><b>펀드 결산 · 기준가</b></td><td><span class="tag law">자본시장법 §238~240</span></td><td>감사 수행 법인용. 사무관리회사 명세와의 대사 4종.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>정산 · 대사</h2>
+    <p class="sub">건수가 많고 형식이 정해진 반복 업무입니다. 건당 시간이 곧 비용입니다.</p>
+    <div class="grid2">
+      <div class="card"><h3>사업비 정산 검토</h3><p>국고보조·R&amp;D 과제 정산. 집행내역을 넣으면 이중집행 검출, 한도 인정액 차감, 반납액 산정. 사업별 사용기준은 규칙으로 입력합니다.</p></div>
+      <div class="card"><h3>부가세 매입매출 대사</h3><p>고객사의 홈택스 파일(세금계산서·신용카드·현금영수증)과 장부 파일을 올리면 불일치를 유형별로 나누고 세액 영향을 금액으로 냅니다. "안 맞는 게 47건"이 아니라 "기간귀속 오류 2건, 세액 영향 833,700원". 홈택스 카드매출이 월별 합계라는 사실도 그대로 반영합니다.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>어떻게 쓰나</h2>
+    <div class="grid3">
+      <div class="card"><h3>1. 설치</h3><p>압축 파일을 풀고 실행 파일을 더블클릭합니다. 사무소 PC 한 대에 설치하면 브라우저로 씁니다. 서버·계정·클라우드가 없습니다.</p></div>
+      <div class="card"><h3>2. 입력 → 계산 → 조서</h3><p>도구마다 입력·계산·조서의 세 탭이 같습니다. 엑셀·CSV 에서 바로 붙여 넣습니다. 계산 결과와 근거가 .docx 조서로 나옵니다.</p></div>
+      <div class="card"><h3>3. 이월</h3><p>고객사별로 올해 가정과 결과가 저장되고, 내년 건을 열면 출발점으로 채워집니다. 바뀐 가정만 고칩니다.</p></div>
+    </div>
+    <p class="quiet" style="margin-top:14px">라이선스는 사무소 단위, 사용자 수 제한 없음, 연 단위. 가격은 <a href="buy.html">구매·문의</a>에 있습니다.</p>
+    <div class="actions">
+      <a class="btn solid" href="buy.html">체험판 요청</a>
+      <a class="btn" href="free/penalty.html">먼저 무료 계산기 보기</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
+  <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
+</div></footer>
+</body>
+</html>

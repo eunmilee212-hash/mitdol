@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>계리사용 — DB형 퇴직연금 계리평가</title>
+<meta name="description" content="직원 명부와 가정을 넣으면 DBO·근무원가·재정검증·자산인식상한을 한 번에 계산하고 워드 보고서를 만드는 계리사용 도구. 회사에 보내는 자료요청서까지.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html"><span class="todo">회사명</span></a>
+  <nav class="main">
+    <a href="index.html">홈</a>
+    <a href="firm.html">회계법인용</a>
+    <a href="finance.html">기업 재무팀용</a>
+    <a class="on" href="actuary.html">계리사용</a>
+    <a href="free/">무료 도구</a>
+    <a class="cta" href="buy.html">구매·문의</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>계리사 · 계리법인</h1>
+    <p class="lead">DB형 퇴직연금 계리평가. 계리사를 대체하는 것이 아니라 계리사가 쓰는 도구입니다. 명부와 가정을 넣으면 한 번의 투영으로 회계와 재정검증을 동시에 내고, 서명 전에 확인해야 할 것을 화면이 먼저 보여 줍니다.</p>
+  </div>
+
+  <section>
+    <h2>한 번의 투영, 세 가지 목적</h2>
+    <div class="table-scroll"><table class="plain">
+      <thead><tr><th>목적</th><th>근거</th><th>산출물</th></tr></thead>
+      <tbody>
+        <tr><td><b>회계</b></td><td><span class="tag law">K-IFRS 1019</span></td><td>DBO, 당기·과거근무원가, 증감표, 재측정요소, 민감도, 만기분석, 주석 공시 점검(§135~152)</td></tr>
+        <tr><td><b>재정검증</b></td><td><span class="tag law">근퇴법 §16</span></td><td>계속기준·비계속기준, 기준책임준비금, 최소적립금, 적립률</td></tr>
+        <tr><td><b>자산인식상한</b></td><td><span class="tag law">K-IFRS 1019 §64·§126 · 제2114호</span></td><td>상한효과 조정표, 이자(당기손익)/재측정(기타포괄손익) 분리, 최소적립요구와의 상호작용</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>계리사 순서대로</h2>
+    <p class="sub">자료 수령 → 검증 → 가정 → 평가. 화면이 그 순서입니다.</p>
+    <div class="grid3">
+      <div class="card"><h3>1. 자료 올리기</h3><p>당기말 명부만 필수. 전기말 명부가 있으면 증감표와 손익 인식액까지. 탈퇴율·사망률표는 올리면 쓰고 없으면 예시표로 계산하며 그 사실을 표시합니다.</p></div>
+      <div class="card"><h3>2. 검증 · 가정 · 요청서</h3><p>요율표를 읽은 결과(구간 수·범위·<b>단위 판정 근거</b>)가 평가 전에 뜹니다. 단위를 잘못 읽으면 채무가 10배 틀립니다. 계산 불가 행은 「평가 제외」, 회사 확인 행은 「평가 포함」으로 갈라 보여 주고, 회사에 보낼 <b>자료요청서(Word)</b>를 여기서 만듭니다.</p></div>
+      <div class="card"><h3>3. 결과 · 회신 반영</h3><p>요약 카드, 증감표, 자산·손익, 재정검증, 민감도, 만기분석. 회사가 채워 보낸 요청서 워드를 올리면 서술 공시 칸이 자동으로 채워지고, 계리사가 검토한 뒤 반영하면 보고서 본문(Word)과 산출물(Excel)이 나옵니다.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>확인 없이 서명하지 않도록</h2>
+    <div class="grid2">
+      <div class="card"><h3>계리사가 봐야 할 것만 묻습니다</h3><p>명부 컬럼은 자동으로 잡고 필수 항목을 못 잡았을 때만 묻습니다. 반대로 요율표 단위는 맞아 보여도 반드시 화면에서 확인시킵니다. 사람이 볼 이유가 있는 것과 없는 것을 가릅니다.</p></div>
+      <div class="card"><h3>회사별 이월</h3><p>가정·제도 정보·작년 서술 공시가 회사별로 저장되어 올해 건을 열면 채워져 있습니다. 전기말 숫자와의 증감이 자동으로 이어집니다.</p></div>
+    </div>
+    <p class="quiet" style="margin-top:14px">회계법인 감사인이 계리보고서를 검토하는 용도는 <a href="firm.html">회계법인용 「퇴직급여 DBO 검토」</a>입니다. 이 페이지는 본평가를 수행하는 계리사용입니다.</p>
+    <div class="actions">
+      <a class="btn solid" href="buy.html">체험판 요청</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
+  <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
+</div></footer>
+</body>
+</html>

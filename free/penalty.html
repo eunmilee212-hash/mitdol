@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>세금계산서 가산세 계산기 — 지연발급·미발급·과소신고·납부지연·수정신고 감면</title>
+<meta name="description" content="부가가치세법 §60 가산세(지연발급·미발급·전자미전송·가공·위장·합계표)와 국세기본법 과소신고·납부지연 가산세, 수정신고 감면율을 조문과 함께 계산합니다. §60⑨ 중복배제를 지킵니다.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="todo">회사명</span></a>
+  <nav class="main">
+    <a href="../index.html">홈</a>
+    <a href="../firm.html">회계법인용</a>
+    <a href="../finance.html">기업 재무팀용</a>
+    <a href="../actuary.html">계리사용</a>
+    <a class="on" href="./">무료 도구</a>
+    <a class="cta" href="../buy.html">구매·문의</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="hero" style="padding-bottom:20px">
+    <h1>세금계산서 가산세 계산기</h1>
+    <p class="lead">한 건에 걸린 사유를 고르면 부가가치세법 §60 가산세를 <b>§60⑨ 중복배제를 적용해</b> 계산합니다. 과소신고·납부지연 가산세와 수정신고 감면율도 함께 냅니다. 브라우저 안에서만 계산하며 입력값은 어디로도 전송되지 않습니다.</p>
+    <p class="quiet">근거: 부가가치세법 §39·§60 (시행 2026-01-02) · 국세기본법 §47의3·§47의4·§48② (시행 2026-01-01). 아래 계산은 같은 규격의 정답지로 페이지가 열릴 때마다 스스로 검산합니다: <span id="selftest">검산 중…</span></p>
+  </div>
+
+  <div class="calc">
+    <fieldset>
+      <legend>① 세금계산서 가산세 — 부가가치세법 §60</legend>
+      <label class="row"><span>공급가액 (원)</span><input type="number" id="supply" value="10000000" step="1000" min="0"></label>
+      <div class="reasons" id="reasons"></div>
+      <p class="quiet" style="margin:10px 0 0">같은 건에 여러 사유가 걸리면 전부 더하면 과다계상, 하나만 세면 과소계상입니다. §60⑨ 순서대로 눌러야 합니다. 눌린 사유는 표에 줄을 그어 표시합니다.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>② 신고·납부 가산세 — 국세기본법</legend>
+      <label class="row"><span>과소신고한 <b>납부세액</b> (원)</span><input type="number" id="understated" value="5000000" step="1000" min="0"></label>
+      <label class="row"><span>그중 부정행위 부분 (원)</span><input type="number" id="fraud" value="0" step="1000" min="0"></label>
+      <label class="row"><span>역외거래 부정행위 (60%)</span><span><input type="checkbox" id="offshore"></span></label>
+      <label class="row"><span>과소신고 영세율 과세표준 (원)</span><input type="number" id="zeroBase" value="0" step="1000" min="0"></label>
+      <label class="row"><span>미납세액 (원, 비우면 과소신고세액과 같게)</span><input type="number" id="unpaid" placeholder="= 과소신고세액" step="1000" min="0"></label>
+      <label class="row"><span>법정신고기한</span><input type="date" id="due" value="2025-07-25"></label>
+      <label class="row"><span>수정신고(납부)일</span><input type="date" id="amend" value="2025-08-10"></label>
+      <label class="row"><span>납부지연 이자율 (1일, %)</span><input type="number" id="dailyPct" value="0.022" step="0.001" min="0"></label>
+      <p class="quiet" style="margin:10px 0 0">과소신고 가산세는 <b>과소신고한 납부세액</b>의 10%입니다. 공급가액의 10%가 아닙니다. 이자율은 시행령 사항이라 고칠 수 있게 두었습니다.</p>
+    </fieldset>
+
+    <div class="result" id="result"></div>
+    <div class="note" style="margin-top:14px"><b>감면은 과소신고 가산세(§47의3)에만 적용됩니다.</b> §60 가산세와 납부지연 가산세(§47의4)는 수정신고를 빨리 해도 감면되지 않습니다. "빨리 수정신고하면 다 깎인다"는 실무에서 흔한 오해입니다 (§48②1 각 목 외 부분).</div>
+  </div>
+
+  <section>
+    <h2>이 계산이 나오게 된 자리</h2>
+    <p class="sub">이 계산기는 <a href="../finance.html">부가세 매입매출 대사</a> 도구의 가산세 엔진을 그대로 옮긴 것입니다. 그 도구는 홈택스 파일과 장부 파일을 올리면 불일치 건마다 위 사유를 자동으로 붙여 "수정신고 검토 대상 ○건, 노출 ○원"을 냅니다. 한 건씩 손으로 넣는 대신 분기 전체를 한 번에 보고 싶다면 그쪽입니다.</p>
+    <div class="actions"><a class="btn solid" href="../buy.html">체험판 요청</a><a class="btn ghost" href="./">다른 무료 도구 · 글</a></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
+  <div>계산 결과는 참고용이며 개별 사안의 판단은 전문가 검토가 필요합니다.</div>
+</div></footer>
+
+<script>
+/* penalty.py(vat_recon) 의 JS 이식. 규격 docs/spec/penalty.md. 숫자 규칙이 바뀌면 양쪽을 같이 고친다. */
+const RATES = {
+  "미등록":          [0.01,  "§60①1", "등록 신청 전 공급가액"],
+  "지연발급":        [0.01,  "§60②1", "발급시기 후 확정신고기한 내 발급"],
+  "미발급":          [0.02,  "§60②2", "확정신고기한까지 미발급"],
+  "미발급_전자위반": [0.01,  "§60②2 단서", "전자의무자 종이발급·타사업장 명의"],
+  "전자지연전송":    [0.003, "§60②3", "전송기한 후 확정신고기한 내 전송"],
+  "전자미전송":      [0.005, "§60②4", "확정신고기한까지 미전송"],
+  "부실기재":        [0.01,  "§60②5", "필요적 기재사항 착오·누락"],
+  "가공발급":        [0.03,  "§60③1", "실물거래 없이 발급"],
+  "가공수취":        [0.03,  "§60③2", "실물거래 없이 수취"],
+  "위장발급":        [0.02,  "§60③3", "실제 공급자가 아닌 명의로 발급"],
+  "위장수취":        [0.02,  "§60③4", "실제 공급자가 아닌 명의로 수취"],
+  "과다기재발급":    [0.02,  "§60③5", "공급가액 과다기재 발급"],
+  "과다기재수취":    [0.02,  "§60③6", "공급가액 과다기재 수취"],
+  "매출합계표미제출":[0.005, "§60⑥1", "매출처별 세금계산서합계표 미제출"],
+  "매출합계표부실":  [0.005, "§60⑥2", "매출처별 합계표 등록번호·공급가액 부실"],
+  "매출합계표지연":  [0.003, "§60⑥3", "예정신고 누락 → 확정신고 시 제출"],
+  "매입합계표미제출":[0.005, "§60⑦2", "매입처별 합계표 미제출·부실"],
+  "매입합계표과다":  [0.005, "§60⑦3", "매입처별 합계표 공급가액 과다기재"],
+};
+const GROUPS = [["발급·등록", ["미등록","지연발급","미발급","미발급_전자위반","부실기재"]],
+                ["전자 전송", ["전자지연전송","전자미전송"]],
+                ["가공·위장·과다기재", ["가공발급","가공수취","위장발급","위장수취","과다기재발급","과다기재수취"]],
+                ["합계표", ["매출합계표미제출","매출합계표부실","매출합계표지연","매입합계표미제출","매입합계표과다"]]];
+const MAECHUL = ["매출합계표미제출","매출합계표부실","매출합계표지연"];
+const MAEIP = ["매입합계표미제출","매입합계표과다"];
+const HANG2_EXCEPT_2 = ["지연발급","전자지연전송","전자미전송","부실기재"];
+// §60⑨ 중복배제 — {적용된 사유: 그 부분에 적용하지 않는 사유들}
+const SUPPRESS = {
+  "미등록": [...HANG2_EXCEPT_2, ...MAECHUL],                       // ⑨1
+  "미발급": ["미등록", ...MAECHUL, ...MAEIP],                        // ⑨3
+  "미발급_전자위반": ["미등록", ...MAECHUL, ...MAEIP],
+  "위장발급": ["미등록", "미발급", ...MAECHUL, ...MAEIP],            // ⑨4
+  "과다기재발급": ["미등록", "부실기재", ...MAECHUL, ...MAEIP],      // ⑨5
+};
+for (const k of ["가공발급","가공수취","위장수취","과다기재수취"]) SUPPRESS[k] = ["미등록", ...MAECHUL, ...MAEIP];
+for (const k of HANG2_EXCEPT_2) if (!SUPPRESS[k]) SUPPRESS[k] = [...MAECHUL];                       // ⑨2
+
+const UNDERREPORT_RATE = 0.10, UNDERREPORT_FRAUD = 0.40, UNDERREPORT_FRAUD_OFFSHORE = 0.60, ZERO_RATE_EXTRA = 0.005;
+const AMEND_RELIEF = [[1, 0.90], [3, 0.75], [6, 0.50], [12, 0.30], [18, 0.20], [24, 0.10]];
+
+// 파이썬 round() 와 같은 반올림(짝수 반올림) — 두 구현의 숫자가 1원도 어긋나지 않게
+function rnd(x) { const f = Math.floor(x), d = x - f; if (d > 0.5) return f + 1; if (d < 0.5) return f; return f % 2 === 0 ? f : f + 1; }
+const won = (n) => Math.round(n).toLocaleString("ko-KR");
+
+function itemPenalty(supply, reasons) {
+  const suppressed = {};
+  for (const r of reasons) for (const v of (SUPPRESS[r] || [])) if (reasons.includes(v) && v !== r) suppressed[v] = r;
+  const items = []; let total = 0;
+  for (const r of reasons) {
+    const [rate, basis, desc] = RATES[r];
+    if (suppressed[r]) { items.push({ reason: r, basis, rate, amt: 0, on: false, desc, why: `${suppressed[r]} 적용 → §60⑨ 중복배제` }); continue; }
+    const amt = rnd(supply * rate); total += amt;
+    items.push({ reason: r, basis, rate, amt, on: true, desc, why: "" });
+  }
+  return { supply: rnd(supply), items, total: rnd(total), suppressedCount: Object.keys(suppressed).length };
+}
+function underreportPenalty(understated, fraud, offshore, zeroBase) {
+  if (fraud > understated + 1e-9) throw new Error("부정행위 부분이 과소신고세액을 초과할 수 없습니다");
+  const normal = Math.max(0, understated - fraud), fr = offshore ? UNDERREPORT_FRAUD_OFFSHORE : UNDERREPORT_FRAUD;
+  const extra = Math.max(0, zeroBase) * ZERO_RATE_EXTRA;
+  return { fraudPart: rnd(fraud * fr), normalPart: rnd(normal * UNDERREPORT_RATE), zeroExtra: rnd(extra),
+           total: rnd(fraud * fr + normal * UNDERREPORT_RATE + extra), basis: "국기법 §47의3" + (extra ? "②2 (영세율)" : "①"),
+           rateNote: fraud ? `부정 ${Math.round(fr*100)}% + 일반 10%` : "일반 10%" };
+}
+function latePaymentPenalty(unpaid, days, dailyRate) {
+  if (days < 0) throw new Error("경과일수는 음수가 될 수 없습니다");
+  return { total: rnd(Math.max(0, unpaid) * days * dailyRate), days, dailyRate, basis: "국기법 §47의4①1" };
+}
+function amendRelief(due, amend) {
+  if (!due || !amend) return { rate: 0, label: "수정신고일 미입력 — 감면 미적용", months: 0 };
+  if (amend < due) return { rate: 0, label: "기한 내 신고 — 감면 대상 아님", months: 0 };
+  const m = (amend - due) / 86400000 / 30.4375;
+  for (let i = 0; i < AMEND_RELIEF.length; i++) {
+    const [cap, rate] = AMEND_RELIEF[i];
+    if (m <= cap) { const prev = i ? AMEND_RELIEF[i-1][0] : 0; return { rate, months: m, label: `${prev ? prev + "개월 초과 " : ""}${cap}개월 이내 → ${Math.round(rate*100)}% 감면` }; }
+  }
+  return { rate: 0, months: m, label: "2년 초과 → 감면 없음" };
+}
+function totalExposure(a60, ur, lp, relief) {
+  const relieved = rnd(ur.total * relief.rate);
+  return { relieved, urAfter: ur.total - relieved, total: rnd(a60 + ur.total - relieved + lp.total) };
+}
+
+/* 화면 */
+const $ = (id) => document.getElementById(id);
+const box = $("reasons");
+for (const [g, keys] of GROUPS) {
+  box.insertAdjacentHTML("beforeend", `<div class="group">${g}</div>`);
+  for (const k of keys) { const [rate, basis] = RATES[k];
+    box.insertAdjacentHTML("beforeend", `<label><input type="checkbox" data-r="${k}"> <span>${k.replace("_", " · ")} <small>${basis} · ${(rate*100).toFixed(rate < 0.01 ? 1 : 0)}%</small></span></label>`); }
+}
+function dateOf(id) { const v = $(id).value; return v ? new Date(v + "T00:00:00") : null; }
+function render() {
+  const supply = +$("supply").value || 0;
+  const reasons = [...box.querySelectorAll("input:checked")].map(i => i.dataset.r);
+  const p = itemPenalty(supply, reasons);
+  const understated = +$("understated").value || 0, fraud = +$("fraud").value || 0, zeroBase = +$("zeroBase").value || 0;
+  const unpaid = $("unpaid").value === "" ? understated : (+$("unpaid").value || 0);
+  const due = dateOf("due"), amend = dateOf("amend");
+  const days = (due && amend && amend > due) ? Math.round((amend - due) / 86400000) : 0;
+  let ur, lp, relief, tot, err = "";
+  try {
+    ur = underreportPenalty(understated, fraud, $("offshore").checked, zeroBase);
+    lp = latePaymentPenalty(unpaid, days, (+$("dailyPct").value || 0) / 100);
+    relief = amendRelief(due, amend);
+    tot = totalExposure(p.total, ur, lp, relief);
+  } catch (e) { err = e.message; }
+  if (err) { $("result").innerHTML = `<div style="color:var(--danger)">${err}</div>`; return; }
+  const rows = p.items.map(it => `<tr class="${it.on ? "" : "off"}"><td>${it.reason.replace("_", " · ")}</td><td>${it.basis}</td><td class="num">${(it.rate*100).toFixed(it.rate < 0.01 ? 1 : 0)}%</td><td class="num">${won(it.amt)}</td><td class="why">${it.on ? it.desc : it.why}</td></tr>`).join("");
+  $("result").innerHTML = `
+    <div class="big">${won(tot.total)} 원 <small>총 노출액 (§60 + 과소신고 감면 후 + 납부지연)</small></div>
+    <div class="table-scroll" style="margin-top:12px"><table class="plain">
+      <thead><tr><th>사유</th><th>조문</th><th class="num">율</th><th class="num">가산세</th><th>비고</th></tr></thead>
+      <tbody>
+        ${rows || `<tr><td colspan="5" class="quiet">①에서 사유를 고르면 §60 가산세가 여기 나옵니다.</td></tr>`}
+        <tr><td colspan="3"><b>§60 소계</b>${p.suppressedCount ? ` <span class="tag">중복배제 ${p.suppressedCount}건</span>` : ""}</td><td class="num"><b>${won(p.total)}</b></td><td></td></tr>
+        <tr><td>과소신고</td><td>${ur.basis}</td><td class="num">${ur.rateNote}</td><td class="num">${won(ur.total)}</td><td>${ur.zeroExtra ? `영세율 추가 ${won(ur.zeroExtra)} 포함` : ""}</td></tr>
+        <tr><td>　수정신고 감면</td><td>국기법 §48②1</td><td class="num">${Math.round(relief.rate*100)}%</td><td class="num">−${won(tot.relieved)}</td><td>${relief.label}</td></tr>
+        <tr><td>납부지연</td><td>${lp.basis}</td><td class="num">${days}일 × ${(lp.dailyRate*100).toFixed(3)}%</td><td class="num">${won(lp.total)}</td><td>감면 없음</td></tr>
+        <tr><td colspan="3"><b>합계</b></td><td class="num"><b>${won(tot.total)}</b></td><td></td></tr>
+      </tbody></table></div>`;
+}
+document.querySelectorAll(".calc input").forEach(i => i.addEventListener("input", render));
+render();
+
+/* 자체 검산 — docs/spec/penalty.md 의 정답지 4건. 하나라도 틀리면 계산기를 믿지 말라고 표시한다. */
+(function selfTest() {
+  const checks = [];
+  const g3 = itemPenalty(10_000_000, ["미발급", "매출합계표미제출"]);
+  checks.push(["정답지3 §60⑨ 중복배제", g3.total === 200_000 && g3.suppressedCount === 1]);
+  checks.push(["정답지4 과소신고는 세액 기준", underreportPenalty(5_000_000, 0, false, 0).total === 500_000]);
+  const ur = underreportPenalty(5_000_000, 0, false, 0), lp = latePaymentPenalty(0, 0, 0.00022);
+  const rel = amendRelief(new Date("2024-07-25T00:00:00"), new Date("2024-08-10T00:00:00"));
+  const e = totalExposure(200_000, ur, lp, rel);
+  checks.push(["정답지5 감면은 §47의3 에만", rel.rate === 0.90 && e.relieved === 450_000 && e.total === 250_000]);
+  checks.push(["정답지6 납부지연", latePaymentPenalty(5_000_000, 100, 0.00022).total === 110_000]);
+  checks.push(["I4 위장발급 → 미발급 눌림", itemPenalty(10_000_000, ["위장발급", "미발급"]).total === 200_000]);
+  checks.push(["I5 과다기재발급 → 부실기재 눌림", itemPenalty(10_000_000, ["과다기재발급", "부실기재"]).total === 200_000]);
+  const bad = checks.filter(c => !c[1]);
+  $("selftest").innerHTML = bad.length ? `<span style="color:var(--danger)">검산 실패 — ${bad.map(c => c[0]).join(", ")}. 이 계산기를 믿지 마십시오.</span>`
+                                       : `<span class="ok">정답지 ${checks.length}건 통과</span>`;
+})();
+</script>
+</body>
+</html>
