@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회계·세무·계리 실무 도구 — 계산은 도구가, 서명은 전문가가</title>
 <meta name="description" content="회계법인·기업 재무팀·계리사가 매 분기 반복하는 평가·대사·공시 업무를 PC 안에서 처리하는 도구. 자료는 PC 밖으로 나가지 않습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,43 +15,128 @@
   <a class="brand" href="index.html"><span class="todo">회사명</span></a>
   <nav class="main">
     <a class="on" href="index.html">홈</a>
-    <a href="firm.html">회계법인용</a>
-    <a href="finance.html">기업 재무팀용</a>
-    <a href="actuary.html">계리사용</a>
+    <a href="firm.html">회계법인</a>
+    <a href="finance.html">기업 재무팀</a>
+    <a href="actuary.html">계리사</a>
     <a href="free/">무료 도구</a>
     <a class="cta" href="buy.html">구매·문의</a>
   </nav>
 </div></header>
 
-<main class="wrap">
-  <div class="hero">
-    <h1>계산은 도구가 합니다.<br>서명은 전문가가 합니다.</h1>
-    <p class="lead">회계법인·기업 재무팀·계리사가 매 분기 되풀이하는 평가·대사·공시 업무를 <b>사용자의 PC 안에서</b> 끝내는 도구입니다. 명부·거래처·재무 자료는 PC 밖으로 나가지 않습니다. 모든 계산은 근거 조문이 붙은 조서로 남습니다.</p>
-    <div class="who">
-      <a class="card link" href="firm.html"><h3>회계법인 · 세무사무소</h3><p>비상장주식·영업권·스톡옵션·RCPS·양도세·이전가격 평가, 사업비 정산, 고객사 부가세 대사. 한 사무소가 연간 수십 건 하는 일의 건당 시간을 줄입니다.</p></a>
-      <a class="card link" href="finance.html"><h3>기업 재무팀</h3><p>분기마다 하는 홈택스·장부 부가세 대사, 그리고 FY2026 사전공시부터 시작되는 IFRS 18 전환. 감사인에게 낼 문서가 산출물입니다.</p></a>
-      <a class="card link" href="actuary.html"><h3>계리사 · 계리법인</h3><p>DB형 퇴직연금 계리평가. 회계(K-IFRS 1019)와 재정검증(근퇴법)을 한 번의 투영으로. 회사에 보내는 자료요청서까지.</p></a>
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <span class="eyebrow">회계사가 만든 실무 도구</span>
+      <h1>계산은 도구가 합니다.<br><em>서명은 전문가가 합니다.</em></h1>
+      <p class="lead">회계법인·기업 재무팀·계리사가 매 분기 되풀이하는 평가·대사·공시 업무를 <b>사용자의 PC 안에서</b> 끝냅니다. 명부·거래처·재무 자료는 PC 밖으로 나가지 않고, 모든 계산에는 근거 조문이 붙은 조서가 남습니다.</p>
+
+      <div class="shot">
+        <div class="bar">
+          <i></i><i></i><i></i>
+          <span>부가세 매입매출 대사 — 2024년 1기 예정, 샘플 자료</span>
+        </div>
+        <div class="body">
+          <div class="kpis">
+            <div class="kpi hot">
+              <div class="k">세액 영향</div>
+              <div class="v num">16,427,100<span class="u">원</span></div>
+            </div>
+            <div class="kpi">
+              <div class="k">가산세 노출</div>
+              <div class="v num">1,319,740<span class="u">원</span></div>
+            </div>
+            <div class="kpi">
+              <div class="k">불일치</div>
+              <div class="v num">25<span class="u">건</span></div>
+            </div>
+            <div class="kpi">
+              <div class="k">매칭</div>
+              <div class="v num">121<span class="u">/126건</span></div>
+            </div>
+          </div>
+          <div class="table-scroll"><table class="grid">
+            <thead><tr>
+              <th>불일치 유형</th><th>심각도</th><th class="r">건수</th>
+              <th class="r">세액 영향</th><th class="r">가산세</th><th>근거</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>장부 미계상</td><td><span class="pill high">높음</span></td><td class="r num">5</td><td class="r num">5,266,900</td><td class="r num">0</td><td><span class="pill law">§39①2</span></td></tr>
+              <tr><td>홈택스 미확인</td><td><span class="pill high">높음</span></td><td class="r num">4</td><td class="r num">3,543,000</td><td class="r num">459,520</td><td><span class="pill law">국기법 §47의3</span></td></tr>
+              <tr><td>지연발행</td><td><span class="pill high">높음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">465,150</td><td><span class="pill law">§60②1</span></td></tr>
+              <tr><td>중복 계상</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">1,170,800</td><td class="r num">0</td><td></td></tr>
+              <tr><td>기간귀속 오류</td><td><span class="pill high">높음</span></td><td class="r num">2</td><td class="r num">833,700</td><td class="r num">0</td><td></td></tr>
+              <tr><td>사업자번호 오류</td><td><span class="pill mid">중간</span></td><td class="r num">2</td><td class="r num">5,522,700</td><td class="r num">0</td><td></td></tr>
+              <tr><td>금액 상이</td><td><span class="pill mid">중간</span></td><td class="r num">3</td><td class="r num">90,000</td><td class="r num">395,070</td><td><span class="pill law">§60②5</span></td></tr>
+              <tr><td>일자 상이</td><td><span class="pill low">낮음</span></td><td class="r num">3</td><td class="r num">0</td><td class="r num">0</td><td></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="cap">실제 산출 화면입니다. 샘플 자료에 오류 9종을 심어 두었고, 도구가 그것을 유형별로 분류해 금액으로 환산했습니다. 「샘플 자료로 둘러보기」로 직접 확인하실 수 있습니다.</div>
+      </div>
     </div>
   </div>
 
-  <section>
-    <h2>세 가지 원칙</h2>
-    <p class="sub">기존 회계 프로그램과 경쟁하지 않습니다. 그 프로그램이 하지 않는, 전문가가 손으로 하던 자리만 맡습니다.</p>
-    <div class="principles">
-      <div class="card"><b>자료가 나가지 않는다</b><p>서버가 없습니다. 도구는 사용자의 PC 에서 돌고, 업로드한 파일은 그 PC 폴더에만 있습니다. 보안 검토가 필요한 회사에서도 설치 하나로 끝납니다.</p></div>
-      <div class="card"><b>모든 숫자에 조문이 붙는다</b><p>가산세율, 평가 방법, 공시 항목마다 근거 조항이 조서에 함께 찍힙니다. 3년 뒤 감사나 세무조사에서 "왜 이렇게 했는가"에 답할 수 있어야 도구입니다.</p></div>
-      <div class="card"><b>모르는 것은 모른다고 적는다</b><p>입력이 없으면 0 이 아니라 "미입력"입니다. 검사를 못 돌리면 "0건"이 아니라 "검사하지 않았다"고 씁니다. 조용히 빠지는 숫자가 없습니다.</p></div>
+  <section><div class="wrap">
+    <div class="sechead">
+      <h2>누가 씁니까</h2>
+      <p>사는 사람에 따라 파는 물건과 설치 방식이 다릅니다. 해당하는 줄로 들어가십시오.</p>
     </div>
-  </section>
+    <div class="doors">
+      <a class="door" href="firm.html">
+        <span class="n">01</span>
+        <h3>회계법인 · 세무사무소</h3>
+        <p>비상장주식·영업권·스톡옵션·RCPS·양도세·이전가격 평가, 사업비 정산, 고객사 부가세 대사. 한 사무소가 연간 수십 건 하는 일의 건당 시간을 줄입니다.</p>
+        <span class="go">도구 열 종 보기</span>
+      </a>
+      <a class="door" href="finance.html">
+        <span class="n">02</span>
+        <h3>기업 재무팀</h3>
+        <p>분기마다 하는 홈택스·장부 부가세 대사, 그리고 FY2026 사전공시부터 시작되는 IFRS 18 전환. 감사인에게 낼 문서가 산출물입니다.</p>
+        <span class="go">두 제품 보기</span>
+      </a>
+      <a class="door" href="actuary.html">
+        <span class="n">03</span>
+        <h3>계리사 · 계리법인</h3>
+        <p>DB형 퇴직연금 계리평가. 회계(K-IFRS 1019)와 재정검증(근퇴법)을 한 번의 투영으로. 회사에 보내는 자료요청서까지.</p>
+        <span class="go">계리평가 보기</span>
+      </a>
+    </div>
+  </div></section>
 
-  <section>
-    <h2>먹어 보고 사십시오</h2>
-    <p class="sub">모든 도구에 「샘플 자료로 둘러보기」가 있습니다. 내 파일이 없어도 전체 화면과 산출물을 볼 수 있습니다. 실제 자료를 넣어 보는 체험판은 구매 페이지에서 요청하십시오.</p>
-    <div class="actions">
-      <a class="btn solid" href="free/penalty.html">무료: 세금계산서 가산세 계산기</a>
-      <a class="btn" href="buy.html">체험판 요청 · 가격</a>
+  <section><div class="wrap">
+    <div class="sechead">
+      <h2>세 가지 원칙</h2>
+      <p>기존 회계 프로그램과 경쟁하지 않습니다. 그 프로그램이 하지 않는, 전문가가 손으로 하던 자리만 맡습니다.</p>
     </div>
-  </section>
+    <div class="rules">
+      <div class="rule">
+        <span class="n">01</span>
+        <h3>자료가 나가지 않는다</h3>
+        <p>서버가 없습니다. 도구는 사용자의 PC 에서 돌고, 업로드한 파일은 그 PC 폴더에만 있습니다. 보안 검토가 필요한 회사에서도 설치 하나로 끝납니다.</p>
+      </div>
+      <div class="rule">
+        <span class="n">02</span>
+        <h3>모든 숫자에 조문이 붙는다</h3>
+        <p>가산세율, 평가 방법, 공시 항목마다 근거 조항이 조서에 함께 찍힙니다. 3년 뒤 감사나 세무조사에서 "왜 이렇게 했는가"에 답할 수 있어야 도구입니다.</p>
+      </div>
+      <div class="rule">
+        <span class="n">03</span>
+        <h3>모르는 것은 모른다고 적는다</h3>
+        <p>입력이 없으면 0 이 아니라 "미입력"입니다. 검사를 못 돌리면 "0건"이 아니라 "검사하지 않았다"고 씁니다. 조용히 빠지는 숫자가 없습니다.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="callout">
+      <h2>먼저 무료 계산기로 확인해 보십시오</h2>
+      <p>세금계산서 가산세를 §60⑨ 중복배제까지 적용해 계산합니다. 과소신고·납부지연·수정신고 감면도 함께 냅니다. 로그인도 수집도 없고, 페이지가 규격 정답지로 스스로 검산합니다.</p>
+      <div class="actions">
+        <a class="btn solid" href="free/penalty.html">가산세 계산기 열기</a>
+        <a class="btn ghost" href="buy.html">체험판 요청 · 가격</a>
+      </div>
+    </div>
+  </div></section>
 </main>
 
 <footer><div class="wrap">

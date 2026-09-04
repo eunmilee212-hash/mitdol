@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>세금계산서 가산세 계산기 — 지연발급·미발급·과소신고·납부지연·수정신고 감면</title>
 <meta name="description" content="부가가치세법 §60 가산세(지연발급·미발급·전자미전송·가공·위장·합계표)와 국세기본법 과소신고·납부지연 가산세, 수정신고 감면율을 조문과 함께 계산합니다. §60⑨ 중복배제를 지킵니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -12,19 +15,19 @@
   <a class="brand" href="../index.html"><span class="todo">회사명</span></a>
   <nav class="main">
     <a href="../index.html">홈</a>
-    <a href="../firm.html">회계법인용</a>
-    <a href="../finance.html">기업 재무팀용</a>
-    <a href="../actuary.html">계리사용</a>
+    <a href="../firm.html">회계법인</a>
+    <a href="../finance.html">기업 재무팀</a>
+    <a href="../actuary.html">계리사</a>
     <a class="on" href="./">무료 도구</a>
     <a class="cta" href="../buy.html">구매·문의</a>
   </nav>
 </div></header>
 
 <main class="wrap">
-  <div class="hero" style="padding-bottom:20px">
+  <div class="pagehead" style="border-bottom:0; padding-bottom:26px">
     <h1>세금계산서 가산세 계산기</h1>
     <p class="lead">한 건에 걸린 사유를 고르면 부가가치세법 §60 가산세를 <b>§60⑨ 중복배제를 적용해</b> 계산합니다. 과소신고·납부지연 가산세와 수정신고 감면율도 함께 냅니다. 브라우저 안에서만 계산하며 입력값은 어디로도 전송되지 않습니다.</p>
-    <p class="quiet">근거: 부가가치세법 §39·§60 (시행 2026-01-02) · 국세기본법 §47의3·§47의4·§48② (시행 2026-01-01). 아래 계산은 같은 규격의 정답지로 페이지가 열릴 때마다 스스로 검산합니다: <span id="selftest">검산 중…</span></p>
+    <p class="quiet" style="margin-top:14px">근거 <span class="pill law">부가가치세법 §39·§60</span> <span class="pill law">국세기본법 §47의3·§47의4·§48②</span> · 아래 계산은 같은 규격의 정답지로 페이지가 열릴 때마다 스스로 검산합니다 → <span id="selftest">검산 중…</span></p>
   </div>
 
   <div class="calc">
@@ -53,8 +56,10 @@
   </div>
 
   <section>
-    <h2>이 계산이 나오게 된 자리</h2>
-    <p class="sub">이 계산기는 <a href="../finance.html">부가세 매입매출 대사</a> 도구의 가산세 엔진을 그대로 옮긴 것입니다. 그 도구는 홈택스 파일과 장부 파일을 올리면 불일치 건마다 위 사유를 자동으로 붙여 "수정신고 검토 대상 ○건, 노출 ○원"을 냅니다. 한 건씩 손으로 넣는 대신 분기 전체를 한 번에 보고 싶다면 그쪽입니다.</p>
+    <div class="sechead">
+      <h2>이 계산이 나오게 된 자리</h2>
+      <p>이 계산기는 <a href="../finance.html">부가세 매입매출 대사</a> 도구의 가산세 엔진을 그대로 옮긴 것입니다. 그 도구는 홈택스 파일과 장부 파일을 올리면 불일치 건마다 위 사유를 자동으로 붙여 "수정신고 검토 대상 ○건, 노출 ○원"을 냅니다. 한 건씩 손으로 넣는 대신 분기 전체를 한 번에 보고 싶다면 그쪽입니다.</p>
+    </div>
     <div class="actions"><a class="btn solid" href="../buy.html">체험판 요청</a><a class="btn ghost" href="./">다른 무료 도구 · 글</a></div>
   </section>
 </main>
