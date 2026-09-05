@@ -1,0 +1,4 @@
+# 색인은 X-Robots-Tag 헤더와 meta robots 로 막는다.
+# 여기서 Disallow 를 걸면 크롤러가 그 noindex 를 읽지 못한다.
+User-agent: *
+Allow: /
