@@ -9,11 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>
-  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      'IntersectionObserver' in window) document.documentElement.className += ' anim';
-</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -59,7 +54,7 @@
             <div class="v num">91.1<span class="u">%</span></div>
           </div>
         </div>
-        <div class="table-scroll rise"><table class="grid">
+        <div class="table-scroll"><table class="grid">
           <thead><tr><th>확정급여채무 증감</th><th class="r">금액</th><th>비고</th></tr></thead>
           <tbody>
             <tr><td>기초 확정급여채무</td><td class="r num">4,261,674,841</td><td class="quiet">기초기말 이월</td></tr>
@@ -78,11 +73,11 @@
   </div>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>한 번의 투영, 세 가지 목적</h2>
       <p>기준책임준비금은 계속기준과 비계속기준 중 큰 금액입니다. IFRS 를 적용하지 않는 회사도 계속기준 산출을 위해 보험수리적 평가가 필요합니다.</p>
     </div>
-    <div class="table-scroll rise"><table class="grid">
+    <div class="table-scroll"><table class="grid">
       <thead><tr><th>목적</th><th>근거</th><th>산출물</th></tr></thead>
       <tbody>
         <tr>
@@ -105,11 +100,11 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>계리사 순서대로</h2>
       <p>자료 수령 → 검증 → 가정 → 평가. 화면이 그 순서입니다.</p>
     </div>
-    <div class="steps rise">
+    <div class="steps">
       <div class="step">
         <h3>자료 올리기</h3>
         <p>당기말 명부만 필수입니다. 전기말 명부가 있으면 증감표와 손익 인식액까지 나옵니다. 탈퇴율·사망률표는 올리면 쓰고, 없으면 예시표로 계산하며 그 사실을 화면에 표시합니다.</p>
@@ -126,8 +121,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise"><h2>확인 없이 서명하지 않도록</h2></div>
-    <div class="items rise">
+    <div class="sechead"><h2>확인 없이 서명하지 않도록</h2></div>
+    <div class="items">
       <div class="item">
         <div class="nm">볼 이유가 있는 것만 묻습니다</div>
         <div class="ds">명부 컬럼은 자동으로 잡고 필수 항목을 못 잡았을 때만 묻습니다. 반대로 요율표 단위는 맞아 보여도 반드시 화면에서 확인시킵니다. 사람이 볼 이유가 있는 것과 없는 것을 가릅니다.</div>
@@ -146,20 +141,5 @@
   <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
-<script>
-/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
-(function () {
-  var els = [].slice.call(document.querySelectorAll('.rise'));
-  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
-  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-  els.forEach(function (e) { io.observe(e); });
-  setTimeout(showAll, 1500);
-})();
-</script>
 </body>
 </html>

@@ -9,11 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>
-  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      'IntersectionObserver' in window) document.documentElement.className += ' anim';
-</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -87,7 +82,7 @@
   </div>
 
   <div class="wrap after-overlap">
-    <div class="proof rise">
+    <div class="proof">
       <div><div class="v">14<span>종</span></div><div class="k">평가·대사·공시 도구</div></div>
       <div><div class="v">374<span>건</span></div><div class="k">규격 테스트 · 전부 통과</div></div>
       <div><div class="v">0<span>대</span></div><div class="k">서버 · 자료가 PC 를 안 떠난다</div></div>
@@ -96,11 +91,11 @@
   </div>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>누가 씁니까</h2>
       <p>사는 사람에 따라 파는 물건과 설치 방식이 다릅니다. 해당하는 줄로 들어가십시오.</p>
     </div>
-    <div class="doors rise">
+    <div class="doors">
       <a class="door" href="firm.html">
         <span class="n">01</span>
         <h3>회계법인 · 세무사무소</h3>
@@ -123,11 +118,11 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>세 가지 원칙</h2>
       <p>기존 회계 프로그램과 경쟁하지 않습니다. 그 프로그램이 하지 않는, 전문가가 손으로 하던 자리만 맡습니다.</p>
     </div>
-    <div class="rules rise">
+    <div class="rules">
       <div class="rule">
         <span class="n">01</span>
         <h3>자료가 나가지 않는다</h3>
@@ -147,7 +142,7 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="callout rise">
+    <div class="callout">
       <h2>먼저 무료 계산기로 확인해 보십시오</h2>
       <p>세금계산서 가산세를 §60⑨ 중복배제까지 적용해 계산합니다. 과소신고·납부지연·수정신고 감면도 함께 냅니다. 로그인도 수집도 없고, 페이지가 규격 정답지로 스스로 검산합니다.</p>
       <div class="actions">
@@ -163,20 +158,5 @@
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
 
-<script>
-/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
-(function () {
-  var els = [].slice.call(document.querySelectorAll('.rise'));
-  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
-  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-  els.forEach(function (e) { io.observe(e); });
-  setTimeout(showAll, 1500);
-})();
-</script>
 </body>
 </html>

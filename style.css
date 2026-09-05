@@ -221,15 +221,10 @@ section + section { border-top: 1px solid var(--line); }
 .sechead h2 { font-size: 32px; font-weight: 700; letter-spacing: -.032em; color: var(--ink); margin-bottom: 14px; }
 .sechead p { font-size: 16.5px; color: var(--ink-3); }
 
-/* 스크롤 등장 — 아주 약하게.
-   ★ 기본값은 '보임'이다. JS 가 살아 있을 때만 숨긴다(html.anim).
-     관찰자가 안 돌거나 JS 가 죽으면 내용이 그냥 보인다 — 안 보이는 것이 최악이다. */
-.rise { transition: opacity .5s ease, transform .5s ease; }
-html.anim .rise { opacity: 0; transform: translateY(14px); }
-html.anim .rise.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  html.anim .rise { opacity: 1; transform: none; transition: none; }
-}
+/* 등장 효과는 걷어냈다. 창이 안 그려지는 동안 CSS 전환이 진행되지 않아
+   opacity 가 시작값 0 에 멈추는 일이 실제로 났다 — 읽을 내용이 안 보이는 위험을 안고 갈
+   이유가 없다. 페이지는 처음부터 다 보인다. */
+
 
 /* 고객군 입구 — 큰 카드 */
 .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }

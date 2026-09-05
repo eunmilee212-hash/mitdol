@@ -8,11 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script>
-  /* JS 가 돌 때만 등장 효과를 켠다. 이 줄이 없으면 내용은 처음부터 보인다 */
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      'IntersectionObserver' in window) document.documentElement.className += ' anim';
-</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -36,11 +31,11 @@
   </div>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>가격</h2>
       <p>사무소·법인 단위, 사용자 수 제한 없음, 1년. 갱신 시 이월 자료가 그대로 유지됩니다. 팀장 전결 한도 아래로 잡았습니다.</p>
     </div>
-    <div class="table-scroll rise"><table class="grid">
+    <div class="table-scroll"><table class="grid">
       <thead><tr><th>줄</th><th>포함</th><th class="r">연 라이선스</th></tr></thead>
       <tbody>
         <tr>
@@ -64,7 +59,7 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>체험판</h2>
       <p>기간 제한이 있는 실행 파일을 메일로 보냅니다. 「샘플 자료로 둘러보기」는 기간 없이 쓸 수 있고, 실제 자료는 체험 기간 안에 돌려 보십시오.</p>
     </div>
@@ -74,8 +69,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise"><h2>결제 · 세금계산서</h2></div>
-    <div class="items rise">
+    <div class="sechead"><h2>결제 · 세금계산서</h2></div>
+    <div class="items">
       <div class="item">
         <div class="nm">계좌이체</div>
         <div class="ds"><span class="todo">은행 · 계좌번호 · 예금주</span></div>
@@ -88,11 +83,11 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise">
+    <div class="sechead">
       <h2>그 외 만들고 있는 것</h2>
       <p>이 사이트가 파는 것은 전문가가 혼자 쓰는 도구입니다. 그와 별개로, 회사 안에서 여러 사람이 매일 쓰는 업무 시스템 셋을 만들고 있습니다. 도구와 달리 도입·교육·지원이 붙고 가격 구조도 달라 여기에 값을 적지 않습니다. 해당하는 업무가 있으시면 문의해 주십시오.</p>
     </div>
-    <div class="items rise">
+    <div class="items">
       <div class="item">
         <div class="nm">매입채권 추심<span class="sub">카드 연체채권 매입·추심 회사</span></div>
         <div class="ds">채권 일괄매입부터 직접추심까지의 업무 시스템. 역할 10종, 화면 30종. <b>셋 중 유일하게 현장에서 운영 중입니다.</b></div>
@@ -110,8 +105,8 @@
   </div></section>
 
   <section><div class="wrap">
-    <div class="sechead rise"><h2>자주 묻는 것</h2></div>
-    <div class="items rise">
+    <div class="sechead"><h2>자주 묻는 것</h2></div>
+    <div class="items">
       <div class="item">
         <div class="nm">자료가 밖으로 나갑니까?</div>
         <div class="ds">아닙니다. 서버가 없습니다. 도구는 사용자 PC 에서 돌고 업로드 파일은 그 PC 폴더에만 저장됩니다. 외부 통신을 하는 기능은 선택 기능(DART 조회 등)에 한정되고, 꺼도 나머지는 그대로 돕니다.</div>
@@ -136,20 +131,5 @@
   <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
   <div><span class="todo">문의 메일</span> · 세금계산서 발행 · 계좌이체</div>
 </div></footer>
-<script>
-/* 스크롤 등장. 관찰자가 못 도는 환경(숨은 탭 등)을 대비해 1.5초 뒤 무조건 보여 준다 */
-(function () {
-  var els = [].slice.call(document.querySelectorAll('.rise'));
-  function showAll() { els.forEach(function (e) { e.classList.add('in'); }); }
-  if (!document.documentElement.classList.contains('anim')) { showAll(); return; }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-  els.forEach(function (e) { io.observe(e); });
-  setTimeout(showAll, 1500);
-})();
-</script>
 </body>
 </html>
