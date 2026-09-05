@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비상장주식 평가 계산기 — 순손익가치·순자산가치 가중평균</title>
+<meta name="description" content="상증세법 시행령 §54 에 따라 1주당 순손익가치와 순자산가치를 3:2(부동산과다법인 2:3)로 가중평균하고 순자산가치 80% 하한을 적용해 비상장주식 평가액을 계산합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="todo">회사명</span></a>
+  <nav class="main">
+    <a href="../index.html">홈</a>
+    <a href="../firm.html">회계법인</a>
+    <a href="../finance.html">기업 재무팀</a>
+    <a href="../actuary.html">계리사</a>
+    <a class="on" href="./">무료 도구</a>
+    <a class="cta" href="../buy.html">구매·문의</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="pagehead" style="border-bottom:0; padding-bottom:26px">
+    <h1>비상장주식 평가 계산기</h1>
+    <p class="lead">상속·증여 건의 1주당 평가액입니다. 최근 3년 순손익액과 순자산가액을 넣으면 <b>순손익가치와 순자산가치를 가중평균</b>하고 <b>순자산가치 80% 하한</b>까지 적용해 냅니다.</p>
+    <p class="quiet" style="margin-top:14px">근거 <span class="pill law">상증세법 시행령 §54</span> <span class="pill law">§55</span> <span class="pill law">§56</span> · 브라우저 안에서만 계산하며 입력값은 전송되지 않습니다 · 정답지 자체 검산 → <span id="selftest">검산 중…</span></p>
+  </div>
+
+  <div class="calc">
+    <fieldset>
+      <legend>① 최근 3년 순손익액 (§56①)</legend>
+      <label class="row"><span>직전 1년 (원)</span><input type="number" id="y1" value="1200000000" step="1000000"></label>
+      <label class="row"><span>직전 2년 (원)</span><input type="number" id="y2" value="900000000" step="1000000"></label>
+      <label class="row"><span>직전 3년 (원)</span><input type="number" id="y3" value="600000000" step="1000000"></label>
+      <label class="row"><span>발행주식총수 (주)</span><input type="number" id="shares" value="100000" step="1000" min="1"></label>
+      <label class="row"><span>순손익가치 환원율</span><input type="number" id="cap" value="10" step="0.1" min="0.1"> </label>
+      <p class="quiet" style="margin:12px 0 0">가중치는 <b>3 : 2 : 1</b> 입니다 — 직전 1년에 3, 2년에 2, 3년에 1을 곱해 6으로 나눕니다. 가중평균액이 <b>음수면 0</b>으로 봅니다(§56①).</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>② 순자산가액 (§54②·§55)</legend>
+      <label class="row"><span>순자산가액 (원)</span><input type="number" id="netasset" value="8000000000" step="1000000"></label>
+      <label class="row"><span>부동산과다보유법인</span><span><input type="checkbox" id="realty"> <span class="quiet">자산 중 부동산 50% 이상 — 가중치가 2:3이 됩니다</span></span></label>
+      <p class="quiet" style="margin:12px 0 0">순자산가액은 <b>0원이 하한</b>입니다(§55① 후단). 음수를 넣어도 0으로 봅니다.</p>
+    </fieldset>
+
+    <div class="result" id="result"></div>
+    <div class="note" style="margin-top:14px"><b>이 계산기가 하지 않는 것.</b> 최근 3년 안에 <b>증자·감자</b>가 있었으면 이 계산은 틀립니다 — 연도별 주식수가 달라 1주당 순손익액을 각 연도별로 환산해야 하고(§56③), 유상증자·유상감자는 순손익액 자체도 조정해야 합니다(§56⑤). 자기주식이 있을 때의 80% 하한도 별도 산식입니다(대법원 2025두33647). 최대주주 할증(§63③)도 반영하지 않았습니다.</div>
+  </div>
+
+  <section>
+    <div class="sechead rise">
+      <h2>총액을 먼저 나누면 틀립니다</h2>
+      <p>1주당 순손익액은 <b>각 연도별로 먼저 구한 뒤 가중평균</b>해야 합니다. 총액을 가중평균한 다음 현재 주식수로 나누면 증자·감자가 있었던 법인에서 어긋납니다. 이 계산기는 주식수가 3년간 같다고 보고 계산하므로, 변동이 있었으면 아래 도구를 쓰셔야 합니다.</p>
+    </div>
+    <div class="items rise">
+      <div class="item">
+        <div class="nm">전체 도구가 더 하는 것</div>
+        <div class="ds">연도별 주식수 환산(§56③) · 유상증자·감자 순손익액 조정(§56⑤) · 자기주식 있는 경우의 80% 하한(대법원 2025두33647) · 순자산가치만으로 평가하는 사유 판정(§54④) · 최대주주 할증 · <b>조서(.docx) 출력</b>. 외감법인은 DART 에서 3년 순이익과 자본총계를 자동으로 채웁니다.</div>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="btn solid" href="../buy.html">비상장주식 평가 도구 체험판</a>
+      <a class="btn ghost" href="./">다른 무료 도구</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
+  <div>계산 결과는 참고용이며 개별 사안의 판단은 전문가 검토가 필요합니다.</div>
+</div></footer>
+
+<script>
+/* engine/estate_stock.py 의 축소판. 규격 docs/spec/estate_stock.md §1.1~1.4.
+   숫자 규칙이 바뀌면 양쪽을 같이 고친다. */
+var NET_ASSET_FLOOR = 0.80;      // §54① 단서
+
+/* 1주당 최근 3년 순손익액의 가중평균 — 3:2:1 ÷ 6. 음수면 0 (§56①) */
+function weightedIncomePerShare(y1, y2, y3, shares) {
+  if (!shares) return 0;
+  var per = (y1 / shares) * 3 + (y2 / shares) * 2 + (y3 / shares) * 1;
+  return Math.max(per / 6, 0);
+}
+function evaluate(o) {
+  var shares = o.shares > 0 ? o.shares : 1;
+  var wavg = weightedIncomePerShare(o.y1, o.y2, o.y3, shares);
+  var profitValue = o.capRate > 0 ? wavg / o.capRate : 0;      // 순손익가치
+  var netAsset = Math.max(o.netAsset, 0);                       // §55① 후단 0원 하한
+  var assetValue = netAsset / shares;                           // 순자산가치
+  var w1 = o.realty ? 2 : 3, w2 = o.realty ? 3 : 2;             // §54① 가중치
+  var blended = (profitValue * w1 + assetValue * w2) / (w1 + w2);
+  var floor = assetValue * NET_ASSET_FLOOR;                     // §54① 단서
+  var floored = blended < floor;
+  return { wavg: wavg, profitValue: profitValue, assetValue: assetValue,
+           w1: w1, w2: w2, blended: blended, floor: floor, floored: floored,
+           value: floored ? floor : blended };
+}
+
+var won = function (n) { return Math.round(n).toLocaleString('ko-KR'); };
+var $ = function (id) { return document.getElementById(id); };
+
+function render() {
+  var o = {
+    y1: +$('y1').value || 0, y2: +$('y2').value || 0, y3: +$('y3').value || 0,
+    shares: +$('shares').value || 0, capRate: (+$('cap').value || 0) / 100,
+    netAsset: +$('netasset').value || 0, realty: $('realty').checked
+  };
+  if (o.shares <= 0) { $('result').innerHTML = '<div class="note">발행주식총수를 1주 이상 넣어 주십시오.</div>'; return; }
+  var r = evaluate(o);
+  var notes = [];
+  if (r.floored) notes.push('가중평균가액이 순자산가치의 80%보다 낮아 <b>하한을 적용</b>했습니다 (§54① 단서).');
+  if ((o.y1 / o.shares) * 3 + (o.y2 / o.shares) * 2 + (o.y3 / o.shares) < 0) notes.push('순손익액 가중평균이 음수라 <b>0으로 보았습니다</b> (§56①).');
+  if (+$('netasset').value < 0) notes.push('순자산가액이 음수라 <b>0원으로 보았습니다</b> (§55① 후단).');
+
+  $('result').innerHTML =
+    '<div class="big">' + won(r.value) + ' 원 <small>1주당 평가액' + (r.floored ? ' · 80% 하한 적용' : '') + '</small></div>' +
+    '<div class="table-scroll" style="margin-top:14px"><table class="grid">' +
+    '<thead><tr><th>항목</th><th>산식</th><th class="r">1주당 금액</th></tr></thead><tbody>' +
+      '<tr><td>순손익액 가중평균</td><td class="quiet">(1년×3 + 2년×2 + 3년×1) ÷ 6</td><td class="r num">' + won(r.wavg) + '</td></tr>' +
+      '<tr><td><b>순손익가치</b></td><td class="quiet">가중평균 ÷ 환원율 ' + (o.capRate * 100).toFixed(1) + '%</td><td class="r num"><b>' + won(r.profitValue) + '</b></td></tr>' +
+      '<tr><td><b>순자산가치</b></td><td class="quiet">순자산가액 ÷ 발행주식총수</td><td class="r num"><b>' + won(r.assetValue) + '</b></td></tr>' +
+      '<tr><td>가중평균가액</td><td class="quiet">순손익 ' + r.w1 + ' : 순자산 ' + r.w2 + (o.realty ? ' (부동산과다)' : '') + '</td><td class="r num">' + won(r.blended) + '</td></tr>' +
+      '<tr><td>순자산가치 80% 하한</td><td class="quiet">§54① 단서</td><td class="r num">' + won(r.floor) + '</td></tr>' +
+      '<tr class="total"><td>1주당 평가액</td><td class="quiet">' + (r.floored ? '하한' : '가중평균가액') + '</td><td class="r num">' + won(r.value) + '</td></tr>' +
+      '<tr><td><b>총 평가액</b></td><td class="quiet">1주당 × ' + won(o.shares) + '주</td><td class="r num"><b>' + won(r.value * o.shares) + '</b></td></tr>' +
+    '</tbody></table></div>' +
+    (notes.length ? '<div class="note" style="margin-top:12px">' + notes.join('<br>') + '</div>' : '');
+}
+document.querySelectorAll('.calc input').forEach(function (i) {
+  i.addEventListener('input', render); i.addEventListener('change', render);
+});
+render();
+
+/* 자체 검산 — 규격 docs/spec/estate_stock.md */
+(function selfTest() {
+  var c = [];
+  /* 가중평균 3:2:1 — 1주당 순손익 300/200/100 이면 (300*3+200*2+100)/6 = 233.33 */
+  c.push(['§56① 가중치 3:2:1', Math.abs(weightedIncomePerShare(300, 200, 100, 1) - (900 + 400 + 100) / 6) < 1e-9]);
+  c.push(['가중평균 음수는 0', weightedIncomePerShare(-300, -200, -100, 1) === 0]);
+  /* 순손익가치 1,000 · 순자산가치 500 · 일반 → (1000*3 + 500*2)/5 = 800, 하한 400 → 800 */
+  var a = evaluate({ y1: 100, y2: 100, y3: 100, shares: 1, capRate: 0.10, netAsset: 500, realty: false });
+  c.push(['일반 가중치 3:2', a.w1 === 3 && a.w2 === 2 && Math.abs(a.blended - 800) < 1e-9 && !a.floored]);
+  /* 부동산과다 → 2:3 → (1000*2 + 500*3)/5 = 700 */
+  var b = evaluate({ y1: 100, y2: 100, y3: 100, shares: 1, capRate: 0.10, netAsset: 500, realty: true });
+  c.push(['부동산과다 가중치 2:3', b.w1 === 2 && b.w2 === 3 && Math.abs(b.blended - 700) < 1e-9]);
+  /* 순손익 0 · 순자산가치 1,000 → 가중평균 400 < 하한 800 → 800 */
+  var d = evaluate({ y1: 0, y2: 0, y3: 0, shares: 1, capRate: 0.10, netAsset: 1000, realty: false });
+  c.push(['§54① 단서 80% 하한', d.floored && Math.abs(d.value - 800) < 1e-9]);
+  var e = evaluate({ y1: 0, y2: 0, y3: 0, shares: 1, capRate: 0.10, netAsset: -500, realty: false });
+  c.push(['§55① 순자산 0원 하한', e.assetValue === 0]);
+  var bad = c.filter(function (x) { return !x[1]; });
+  $('selftest').innerHTML = bad.length
+    ? '<span style="color:var(--danger)">검산 실패 — ' + bad.map(function (x) { return x[0]; }).join(', ') + '. 이 계산기를 믿지 마십시오.</span>'
+    : '<span class="ok">정답지 ' + c.length + '건 통과</span>';
+})();
+</script>
+</body>
+</html>

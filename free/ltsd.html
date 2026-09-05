@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>장기보유특별공제 계산기 — 표1·표2 판정, 구간표 그대로</title>
+<meta name="description" content="소득세법 §95② 장기보유특별공제를 표1·표2로 판정해 계산합니다. 구간표라 보유 3.9년은 6%입니다. 1세대1주택 표2는 거주 2년 이상일 때만, 주택이 아니면 적용하지 않습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="todo">회사명</span></a>
+  <nav class="main">
+    <a href="../index.html">홈</a>
+    <a href="../firm.html">회계법인</a>
+    <a href="../finance.html">기업 재무팀</a>
+    <a href="../actuary.html">계리사</a>
+    <a class="on" href="./">무료 도구</a>
+    <a class="cta" href="../buy.html">구매·문의</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="pagehead" style="border-bottom:0; padding-bottom:26px">
+    <h1>장기보유특별공제 계산기</h1>
+    <p class="lead">보유·거주 기간을 넣으면 <b>표1·표2를 판정해</b> 공제율과 공제액을 냅니다. 실무에서 가장 자주 틀리는 자리 셋 — 구간표를 비례배분하는 것, 거주 2년 없이 표2를 쓰는 것, 주택이 아닌데 표2를 붙이는 것 — 을 그 자리에서 잡아 줍니다.</p>
+    <p class="quiet" style="margin-top:14px">근거 <span class="pill law">소득세법 §95②</span> <span class="pill law">시행령 §159의4</span> · 브라우저 안에서만 계산하며 입력값은 전송되지 않습니다 · 정답지 자체 검산 → <span id="selftest">검산 중…</span></p>
+  </div>
+
+  <div class="calc">
+    <fieldset>
+      <legend>양도 자산</legend>
+      <label class="row"><span>자산 유형</span>
+        <span>
+          <select id="kind">
+            <option value="house">주택</option>
+            <option value="land">토지 · 건물</option>
+            <option value="right">조합원입주권</option>
+            <option value="presale">분양권</option>
+          </select>
+        </span>
+      </label>
+      <label class="row"><span>양도차익 (원)</span><input type="number" id="gain" value="500000000" step="1000000" min="0"></label>
+      <label class="row"><span>보유기간 (년)</span><input type="number" id="hold" value="3.9" step="0.1" min="0"></label>
+      <label class="row"><span>거주기간 (년)</span><input type="number" id="live" value="0" step="0.1" min="0"></label>
+      <label class="row"><span>1세대 1주택</span><span><input type="checkbox" id="one"> <span class="quiet">주택일 때만 뜻이 있습니다</span></span></label>
+      <p class="quiet" style="margin:12px 0 0"><b>구간표입니다. 비례배분하지 않습니다.</b> "3년 이상 4년 미만 = 100분의 6"이므로 3.9년은 6%이지 7.8%가 아닙니다. 아래 계산은 연 단위로 내림합니다.</p>
+    </fieldset>
+
+    <div class="result" id="result"></div>
+    <div class="note" style="margin-top:14px"><b>표2는 1세대1주택이면서 거주 2년 이상일 때만</b> 적용됩니다(시행령 §159의4). 거주 요건 없이 표2를 쓰면 공제가 최대 80%까지 부풀려져 세액이 크게 과소계상됩니다.</div>
+  </div>
+
+  <section>
+    <div class="sechead rise">
+      <h2>여기서 실제로 틀렸던 것 둘</h2>
+      <p>이 계산기는 <a href="../firm.html">양도소득세 도구</a>의 공제 엔진을 그대로 옮긴 것입니다. 그 엔진의 규격에는 현장에서 만난 오류가 불변식으로 박혀 있습니다.</p>
+    </div>
+    <div class="items rise">
+      <div class="item">
+        <div class="nm">구간표를 비례배분<span class="sub">보유 3.9년</span></div>
+        <div class="ds">공제율을 보유연수에 비례시키면 3.9년이 7.8%가 됩니다. 법은 구간표라 <b>6%</b>입니다. 차이가 그대로 세액이 됩니다.</div>
+      </div>
+      <div class="item">
+        <div class="nm">토지에 표2 적용<span class="sub">세액 5배 과소</span></div>
+        <div class="ds">비과세·고가주택 안분·표2·거주공제는 <b>주택 전용</b>입니다. 토지·건물·입주권·분양권에 1세대1주택 입력이 와도 무시해야 합니다. 무시했다는 사실은 조서에 남깁니다.</div>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="btn solid" href="../buy.html">양도소득세 도구 체험판</a>
+      <a class="btn ghost" href="./">다른 무료 도구</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><span class="todo">회사명 · 사업자등록번호 · 대표</span></div>
+  <div>계산 결과는 참고용이며 개별 사안의 판단은 전문가 검토가 필요합니다.</div>
+</div></footer>
+
+<script>
+/* engine/capital_gains.py 의 ltd_rate() JS 이식. 규격 docs/spec/capital_gains.md §2.3.
+   숫자 규칙이 바뀌면 양쪽을 같이 고친다. */
+
+/* 분양권은 장특공 대상이 아니다. 입주권은 관리처분인가 전 양도차익에만 붙어
+   간이 계산의 범위를 넘으므로 여기서는 계산하지 않고 그 사실을 말한다. */
+var NO_LTSD = { presale: '분양권은 장기보유특별공제 대상이 아닙니다.',
+                right: '조합원입주권은 관리처분계획 인가 전 양도차익에만 공제가 붙습니다(§95② 괄호). 안분이 필요해 이 계산기의 범위를 넘습니다.' };
+
+function ltdRate(holdingYears, residenceYears, oneHouse) {
+  var h = Math.floor(holdingYears), r = Math.floor(residenceYears);
+  if (h < 3) return { rate: 0, table: '-', why: '보유 3년 미만 (§95②)' };
+  if (oneHouse && r >= 2) {
+    var hold = Math.min(h, 10) * 0.04;                 // 3년 12% … 10년 40%
+    var live = (r === 2) ? 0.08                        // 2년 이상 3년 미만 8%
+                         : Math.min(r, 10) * 0.04;     // 3년 12% … 10년 40%
+    return { rate: Math.min(hold + live, 0.80), table: '표2', hold: hold, live: live,
+             why: '1세대1주택 — 보유 ' + h + '년 ' + pct(hold) + ' + 거주 ' + r + '년 ' + pct(live) };
+  }
+  var rate = Math.min(Math.min(h, 15) * 0.02, 0.30);   // 3년 6% … 15년 30%
+  return { rate: rate, table: '표1', why: '보유 ' + h + '년 ' + pct(rate) };
+}
+function pct(x) { return Math.round(x * 100) + '%'; }
+var won = function (n) { return Math.round(n).toLocaleString('ko-KR'); };
+var $ = function (id) { return document.getElementById(id); };
+
+function render() {
+  var kind = $('kind').value;
+  var gain = +$('gain').value || 0;
+  var hold = +$('hold').value || 0;
+  var live = +$('live').value || 0;
+  var oneRaw = $('one').checked;
+  var isHouse = kind === 'house';
+  var notes = [];
+
+  if (NO_LTSD[kind]) {
+    $('result').innerHTML =
+      '<div class="big">0 원 <small>장기보유특별공제</small></div>' +
+      '<div class="note" style="margin-top:14px">' + NO_LTSD[kind] + '</div>';
+    return;
+  }
+
+  /* 자산유형 게이트 — 주택이 아니면 1세대1주택·거주 입력을 무시하고 그 사실을 적는다 */
+  var one = oneRaw && isHouse;
+  if (oneRaw && !isHouse) notes.push('자산이 주택이 아니므로 <b>1세대1주택 입력을 무시</b>했습니다. 표2·거주공제는 주택 전용입니다 (§89①3·§95②).');
+  if (!isHouse && live > 0) notes.push('주택이 아니어서 거주기간은 공제에 쓰이지 않습니다.');
+  if (live > hold) notes.push('<b>거주기간이 보유기간보다 깁니다.</b> 거주는 보유기간 <b>중</b>의 거주입니다(시행령 §159의4). 입력을 확인하십시오 — 이대로면 공제가 부풀려집니다.');
+  if (isHouse && oneRaw && Math.floor(live) < 2) notes.push('1세대1주택이지만 <b>거주 2년 미만</b>이라 표2를 쓸 수 없습니다. 표1로 계산했습니다.');
+
+  var r = ltdRate(hold, live, one);
+  var deduct = Math.round(gain * r.rate);
+  var income = gain - deduct;
+
+  var rows = '';
+  if (r.table === '표2') {
+    rows += '<tr><td>보유 공제</td><td>' + Math.floor(hold) + '년</td><td class="r num">' + pct(r.hold) + '</td><td class="r num">' + won(gain * r.hold) + '</td></tr>' +
+            '<tr><td>거주 공제</td><td>' + Math.floor(live) + '년</td><td class="r num">' + pct(r.live) + '</td><td class="r num">' + won(gain * r.live) + '</td></tr>';
+  }
+  rows += '<tr class="total"><td>장기보유특별공제</td><td>' + r.table + '</td><td class="r num">' + pct(r.rate) + '</td><td class="r num">' + won(deduct) + '</td></tr>';
+
+  $('result').innerHTML =
+    '<div class="big">' + won(deduct) + ' 원 <small>장기보유특별공제 · ' + r.table + ' ' + pct(r.rate) + '</small></div>' +
+    '<div class="table-scroll" style="margin-top:14px"><table class="grid">' +
+      '<thead><tr><th>항목</th><th>기간·적용표</th><th class="r">율</th><th class="r">금액</th></tr></thead><tbody>' +
+      '<tr><td>양도차익</td><td></td><td></td><td class="r num">' + won(gain) + '</td></tr>' +
+      rows +
+      '<tr><td><b>양도소득금액</b></td><td colspan="2" class="quiet">양도차익 − 장특공</td><td class="r num"><b>' + won(income) + '</b></td></tr>' +
+    '</tbody></table></div>' +
+    '<p class="quiet" style="margin-top:12px">판정 근거 — ' + r.why + '</p>' +
+    (notes.length ? '<div class="note" style="margin-top:12px">' + notes.join('<br>') + '</div>' : '');
+}
+document.querySelectorAll('.calc input, .calc select').forEach(function (i) {
+  i.addEventListener('input', render); i.addEventListener('change', render);
+});
+render();
+
+/* 자체 검산 — 규격 docs/spec/capital_gains.md 의 불변식과 정답지 */
+(function selfTest() {
+  var c = [];
+  c.push(['I1 구간표 — 3.9년은 6%', ltdRate(3.9, 0, false).rate === 0.06]);
+  c.push(['표1 상한 30% (15년 이상)', ltdRate(20, 0, false).rate === 0.30]);
+  c.push(['표2 상한 80% (보유10·거주10)', ltdRate(10, 10, true).rate === 0.80]);
+  c.push(['표2 거주 2년은 8%p', Math.abs(ltdRate(10, 2, true).rate - 0.48) < 1e-9]);
+  c.push(['I11 거주 2년 미만이면 표2 불가', ltdRate(10, 1, true).table === '표1']);
+  c.push(['보유 3년 미만은 0%', ltdRate(2.9, 2, true).rate === 0]);
+  c.push(['표1 3년은 6%', ltdRate(3, 0, false).rate === 0.06]);
+  var bad = c.filter(function (x) { return !x[1]; });
+  $('selftest').innerHTML = bad.length
+    ? '<span style="color:var(--danger)">검산 실패 — ' + bad.map(function (x) { return x[0]; }).join(', ') + '. 이 계산기를 믿지 마십시오.</span>'
+    : '<span class="ok">정답지 ' + c.length + '건 통과</span>';
+})();
+</script>
+</body>
+</html>
