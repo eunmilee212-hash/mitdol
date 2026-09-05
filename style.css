@@ -380,12 +380,16 @@ article.post li { font-size: 16.5px; margin-bottom: 9px; color: var(--ink-2); li
 article.post b { font-weight: 600; color: var(--ink); }
 
 /* ── 반응형 ─────────────────────────────────────────────── */
+/* ── 두 칸 (맞는 곳 / 안 맞는 곳) ─────────────────────── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+
 @media (max-width: 900px) {
   .kpis { grid-template-columns: repeat(2, 1fr); }
   .doors, .steps { grid-template-columns: 1fr; }
   .rule { grid-template-columns: 40px 1fr; }
   .rule p { grid-column: 2; }
   .item { grid-template-columns: 1fr; gap: 8px; }
+  .grid2 { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .hero { padding: 56px 0 0; }
