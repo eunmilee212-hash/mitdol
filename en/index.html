@@ -8,16 +8,17 @@
 <meta name="description" content="A Korean CPA with 25 years as a multinational finance lead, working 2–3 days a week as the finance head of small foreign-owned subsidiaries in Korea. Local compliance, HQ reporting, and the judgment calls in between.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css?v=20260917c">
 <style>
   /* 영문 페이지 — 한글용 --sans 대신 라틴 최적화 폰트로 바꾼다.
      한글 폰트로 영문을 조판하면 자간과 굵기가 어색하다. */
-  body { font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  :root { --serif: 'Noto Serif', Georgia, serif; }
+  body { font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
          word-break: normal; overflow-wrap: anywhere; }
   h1, h2, h3 { word-break: normal; }
-  .hero h1 { font-size: 52px; letter-spacing: -.03em; }
-  .lang { font-family: var(--mono); font-size: 12.5px; }
+  .hero h1 { font-size: 50px; letter-spacing: -.015em; }
+  .lang { font-size: 12.5px; }
   @media (max-width: 640px) { .hero h1 { font-size: 32px; } }
 </style>
 </head>
