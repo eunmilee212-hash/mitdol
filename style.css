@@ -254,9 +254,12 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 
 /* ①②를 왼쪽·오른쪽으로 (2026-10-10) — 입력·결과·조문·한계 넷이 같은 자리에서
    같은 쪽을 가리킨다. 눈이 한 번 익으면 아래로 쭉 같은 규칙으로 읽힌다. */
-.calc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 36px; align-items: start; }
-.calc > .result, .calc > .note { grid-column: 1 / -1; }
-.result { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; }
+/* `split` 이 붙은 계산기(가산세)만 가른다 — 갈래가 하나인 계산기는 한 덩어리다.
+   2026-10-11: 종전에는 `.calc`·`.result` 를 통째로 2열로 바꿔 장기보유특별공제와
+   비상장주식의 결과까지 좌우로 찢어 놓았다. */
+.calc.split { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 36px; align-items: start; }
+.calc.split > .result, .calc.split > .note { grid-column: 1 / -1; }
+.result.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; }
 .result .part + .part { margin-top: 0; padding-top: 0; border-top: 0;
   border-left: 1px solid var(--line); padding-left: 36px; }
 .result .sum { grid-column: 1 / -1; }
@@ -267,7 +270,7 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 
 @media (max-width: 860px) {
   /* 좁은 화면에서는 위아래로 쌓는다 — 왼쪽·오른쪽이 무너지면 줄만 길어진다 */
-  .calc, .result, .pair { grid-template-columns: minmax(0, 1fr); }
+  .calc.split, .result.split, .pair { grid-template-columns: minmax(0, 1fr); }
   .result .part + .part, .pair > .col + .col {
     border-left: 0; padding-left: 0; margin-top: 34px; padding-top: 28px;
     border-top: 1px solid var(--line); }
@@ -293,12 +296,17 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
   color: var(--ink); border-bottom: 1px solid var(--ink); }
 .calc .group:first-child { margin-top: 6px; }
 
-/* 입력 줄 — 라벨 250px 고정과 입력칸이 반쪽 너비에서 서로 밀었다 */
-.calc label.row { grid-template-columns: minmax(0, 1fr); gap: 7px; margin: 18px 0;
-  font-size: 15px; align-items: start; }
+/* 입력 줄 — 갈라진 쪽(530px)에서는 위아래로 쌓고, 한 덩어리인 쪽에서는
+   라벨을 왼쪽에 둔다. 폭이 다르면 읽히는 배치도 다르다. */
+.calc label.row { grid-template-columns: 250px minmax(0, 1fr); gap: 14px; margin: 16px 0;
+  font-size: 15px; align-items: center; }
 .calc label.row > span { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
 .calc input[type=number], .calc input[type=date], .calc select {
-  max-width: none; padding: 11px 13px; font-size: 16px; }
+  max-width: 420px; padding: 11px 13px; font-size: 16px; }
+.calc.split label.row { grid-template-columns: minmax(0, 1fr); gap: 7px; margin: 18px 0;
+  align-items: start; }
+.calc.split input[type=number], .calc.split input[type=date],
+.calc.split select { max-width: none; }
 
 /* 표 — 세 칸짜리 조문 표가 덩어리로 보인다. 줄을 띄운다 */
 .pair table.grid, .result table.grid { font-size: 14px; }
