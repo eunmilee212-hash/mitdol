@@ -272,6 +272,71 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
     border-left: 0; padding-left: 0; margin-top: 34px; padding-top: 28px;
     border-top: 1px solid var(--line); }
 }
+/* ── 가독성 (2026-10-11) ─────────────────────────────────────
+   ①② 로 가르면서 칸이 반으로 줄었는데 그 안의 배치를 그대로 두었다.
+   한 줄에 욱여넣은 것들을 편다. */
+
+/* 사유 체크 — 반쪽 너비 안에서 2열은 무리다. 한 줄로 편다 */
+.calc .reasons { grid-template-columns: minmax(0, 1fr); gap: 0; font-size: 15px; }
+.calc .reasons label {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 11px;
+  align-items: start; padding: 10px 2px; border-bottom: 1px solid var(--line);
+  line-height: 1.5; }
+.calc .reasons label:last-child { border-bottom: 0; }
+.calc .reasons label:hover { color: inherit; background: var(--tint); }
+/* 조문은 이름 아래 제 줄에 — 12px 회색으로 뒤에 붙이면 안 읽힌다 */
+.calc .reasons small { display: block; margin-top: 3px; font-size: 13px; color: var(--ink-3); }
+.calc .reasons input[type=checkbox] { width: 17px; height: 17px; margin-top: 2px; }
+
+/* 묶음 제목 — 구분이 되어야 한다 */
+.calc .group { margin: 26px 0 0; padding-bottom: 7px; font-size: 14.5px;
+  color: var(--ink); border-bottom: 1px solid var(--ink); }
+.calc .group:first-child { margin-top: 6px; }
+
+/* 입력 줄 — 라벨 250px 고정과 입력칸이 반쪽 너비에서 서로 밀었다 */
+.calc label.row { grid-template-columns: minmax(0, 1fr); gap: 7px; margin: 18px 0;
+  font-size: 15px; align-items: start; }
+.calc label.row > span { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+.calc input[type=number], .calc input[type=date], .calc select {
+  max-width: none; padding: 11px 13px; font-size: 16px; }
+
+/* 표 — 세 칸짜리 조문 표가 덩어리로 보인다. 줄을 띄운다 */
+.pair table.grid, .result table.grid { font-size: 14px; }
+.pair table.grid th, .pair table.grid td,
+.result table.grid th, .result table.grid td { padding: 12px 12px; line-height: 1.65; }
+.pair table.grid td:first-child { width: 23%; font-weight: 500; color: var(--ink); }
+.result .part table.grid td:first-child { color: var(--ink); }
+
+/* 덩어리 제목 */
+.colh { font-size: 18px; margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink); }
+.result .part h3 { font-size: 18px; margin-bottom: 12px; }
+
+/* 한계 목록 — 이름과 설명이 붙어 있었다 */
+.pair .item { display: block; padding: 16px 0; }
+.pair .item .nm { font-size: 16px; margin-bottom: 5px; }
+.pair .item .ds { font-size: 14.5px; line-height: 1.8; }
+
+@media (max-width: 860px) {
+  .calc label.row { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 아래에 붙는 합계 띠 (2026-10-11) — 체크를 켤 때마다 숫자가 보여야 한다 */
+.stickytotal { position: sticky; bottom: 0; z-index: 40; background: var(--ink);
+  color: #fff; padding: 12px 0; margin-top: 40px; }
+.stickytotal .wrap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 28px; }
+.stickytotal .st-sum { font-size: 20px; font-variant-numeric: tabular-nums; }
+.stickytotal .st-sum b { font-size: 26px; font-weight: 700; }
+.stickytotal .st-sum small { font-size: 13px; color: #B9BFC6; margin-left: 4px; }
+.stickytotal .st-part { margin-left: auto; font-size: 14px; color: #C8CDD3;
+  font-variant-numeric: tabular-nums; }
+.stickytotal .st-part + .st-part { margin-left: 0; }
+.stickytotal .st-part b { color: #fff; font-weight: 600; }
+@media (max-width: 640px) {
+  .stickytotal .st-sum b { font-size: 21px; }
+  .stickytotal .st-part { margin-left: 0; font-size: 13px; }
+}
+
 tr.off td { color: var(--muted); text-decoration: line-through; }
 tr.off td.why { text-decoration: none; color: var(--warn); font-size: 12.5px; }
 

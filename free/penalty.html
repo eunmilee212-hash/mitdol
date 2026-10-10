@@ -8,7 +8,7 @@
 <meta name="description" content="부가가치세법 제60조 가산세(지연발급·미발급·전자세금계산서 전송·가공·위장·과다기재·합계표)와 국세기본법 제47조의3 과소신고·제47조의4 납부지연 가산세, 제48조 제2항 수정신고 감면을 원문 조항 그대로 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../style.css?v=20261010f">
+<link rel="stylesheet" href="../style.css?v=20261011b">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -124,6 +124,14 @@
     <div class="actions" style="margin-top:22px"><a class="btn solid" href="mailto:eunmilee212@gmail.com?subject=%EC%B2%B4%ED%97%98%ED%8C%90%20%EC%9A%94%EC%B2%AD">부가세 대사 도구 체험판</a><a class="btn ghost" href="./">다른 무료 도구 · 글</a></div>
   </section>
 </main>
+
+<div class="stickytotal" id="stick" hidden>
+  <div class="wrap">
+    <span class="st-sum"><b id="stTotal">0</b> 원 <small>① + ② 합계</small></span>
+    <span class="st-part">① 세금계산서 <b id="stVat">0</b></span>
+    <span class="st-part">② 신고·납부 <b id="stBasic">0</b></span>
+  </div>
+</div>
 
 <footer><div class="wrap">
   <div>이은미 공인회계사 · 대표 이은미</div>
@@ -308,6 +316,11 @@ function render() {
       <div class="big">${won(total)} 원 <small>① + ② 합계</small></div>
       <div class="quiet">① 제60조 ${won(p.total)} + ② 국세기본법 ${won(basic)}</div>
     </div>`;
+  /* 아래 띠 — 체크를 켤 때마다 숫자가 바뀌는 것이 보여야 한다 (2026-10-11) */
+  $("stTotal").textContent = won(total);
+  $("stVat").textContent = won(p.total);
+  $("stBasic").textContent = won(basic);
+  $("stick").hidden = false;
 }
 $("issued").addEventListener("input", () => { drawReasons(); render(); });
 document.querySelectorAll(".calc input:not([data-r])").forEach(i => i.addEventListener("input", render));
