@@ -51,10 +51,12 @@ b, strong { font-weight: 700; color: var(--ink); }
 .num { font-family: var(--serif); font-variant-numeric: tabular-nums; }
 
 /* ── 머리 — 보고서 표지의 머리처럼 ───────────────────────── */
-header.top { background: var(--bg); border-top: 6px solid var(--ink); }
+/* 머리말은 스크롤에도 붙어 있는다 — 문의 단추가 늘 보여야 한다 (2026-10-10) */
+header.top { background: var(--bg); border-top: 6px solid var(--ink);
+  position: sticky; top: 0; z-index: 50; }
 header.top .wrap {
-  display: flex; align-items: baseline; gap: 12px 28px; flex-wrap: wrap;
-  padding-top: 22px; padding-bottom: 12px;
+  display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;
+  padding-top: 16px; padding-bottom: 12px;
   border-bottom: 3px double var(--ink);
 }
 .brand { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--ink); }
@@ -63,13 +65,19 @@ nav.main { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-left: auto; fon
 nav.main a { color: var(--ink-3); }
 nav.main a:hover { color: var(--brand); text-decoration: none; }
 nav.main a.on { color: var(--ink); font-weight: 700; }
-nav.main a.cta { color: var(--brand); font-weight: 700; }
+/* 문의 — 글자가 아니라 단추다. 이 사이트에서 가장 진한 녹색은 여기 하나뿐이다. */
+nav.main a.cta { background: var(--brand); color: #fff; font-weight: 600;
+  padding: 9px 20px; margin-left: 2px; }
+nav.main a.cta:hover { background: var(--brand-2); color: #fff; text-decoration: none; }
+/* 좁은 화면에서는 메뉴가 여러 줄이 되어 머리말이 화면을 먹는다 — 붙이지 않는다 */
+@media (max-width: 760px) { header.top { position: static; } }
 
 /* ── 첫 면 — 어두운 면을 쓰지 않는다 ─────────────────────── */
 .dark { background: var(--bg); color: var(--ink-2); }
 .hero { padding: 88px 0 0; }
 .hero > h1, .hero > .lead, .hero > .eyebrow { max-width: 860px; }
-.eyebrow { display: block; font-size: 13px; font-weight: 500; letter-spacing: .06em; color: var(--brand); margin-bottom: 22px; }
+.eyebrow { display: block; font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  color: var(--muted); margin-bottom: 22px; }   /* 녹색이었다 — 누를 곳만 녹색으로 남긴다 */
 .hero h1 { font-size: 54px; line-height: 1.28; letter-spacing: -.02em; margin-bottom: 26px; }
 .hero h1 em { font-style: normal; color: var(--brand); }
 .hero .lead, .lead { font-size: 18.5px; color: var(--ink-3); max-width: 700px; line-height: 1.8; }
@@ -144,7 +152,8 @@ section + section { border-top: 1px solid var(--line); }
 .door + .door { padding-left: 22px; border-left: 1px solid var(--line); }
 .door:hover { text-decoration: none; }
 .door:hover h3 { color: var(--brand); }
-.door .n { font-family: var(--serif); font-size: 14px; color: var(--brand); font-weight: 600; }
+.door .n { font-family: var(--serif); font-size: 14px; color: var(--faint, #98A19B);
+  font-weight: 600; }   /* 번호까지 녹색일 이유가 없다 */
 .door h3 { font-size: 20px; margin: 6px 0 10px; }
 .door p { font-size: 14.8px; color: var(--ink-3); line-height: 1.7; }
 .door .go { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 700; color: var(--brand); border-bottom: 1px solid currentColor; }
