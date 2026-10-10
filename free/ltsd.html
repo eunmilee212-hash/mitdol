@@ -8,7 +8,7 @@
 <meta name="description" content="소득세법 제95조 제2항 표 1·표 2와 같은 법 시행령 제159조의4, 제160조 고가주택 안분을 원문 그대로 적용해 장기보유특별공제액과 양도소득금액을 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../style.css?v=20261011d">
+<link rel="stylesheet" href="../style.css?v=20261011e">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -32,6 +32,10 @@
     <p class="quiet" style="margin-top:14px">기준 법령 <span class="pill law">소득세법 (2026. 7. 1. 시행)</span> <span class="pill law">소득세법 시행령 (2026. 7. 1. 시행)</span> · 원문 대조 2026. 9. 15. · 자체 검산 → <span id="selftest">검산 중…</span></p>
   </div>
 
+  <div class="samplebar" id="samplebar">
+      <span><b>예시 숫자가 들어 있습니다.</b> 도구가 무엇을 하는지 바로 보시라고 넣어 둔 것입니다 &mdash; 그대로 두면 <b>예시 결과</b>입니다.</span>
+      <button type="button" id="clearsample">금액 비우기</button>
+    </div>
   <div class="calc">
     <fieldset>
       <legend>양도 자산</legend>
@@ -166,9 +170,57 @@ const won = n => Math.floor(n).toLocaleString("ko-KR");
 const pct = x => (Math.round(x * 1000) / 10) + "%";
 const $ = id => document.getElementById(id);
 
+/* ── 천 단위 쉼표 (2026-10-11) ──────────────────────────────
+   type="number" 는 쉼표를 받지 못해 text 로 두고 직접 찍는다.
+   커서가 튀지 않도록 **앞쪽 자릿수**를 세어 되돌린다. */
+const NUMF = new Intl.NumberFormat("ko-KR");
+const onlyDigits = v => String(v == null ? "" : v).replace(/[^0-9]/g, "");
+function money(id) { return +onlyDigits($(id).value) || 0; }
+function formatMoneyInput(el) {
+  const before = el.value;
+  const caret = (el.selectionStart == null) ? before.length : el.selectionStart;
+  const kept = onlyDigits(before.slice(0, caret)).length;
+  const d = onlyDigits(before);
+  el.value = d ? NUMF.format(+d) : "";
+  let seen = 0, pos = kept ? el.value.length : 0;
+  if (kept) {
+    for (let i = 0; i < el.value.length; i++) {
+      if (el.value.charCodeAt(i) >= 48 && el.value.charCodeAt(i) <= 57) seen++;
+      if (seen === kept) { pos = i + 1; break; }
+    }
+  }
+  try { el.setSelectionRange(pos, pos); } catch (e) { /* 숨은 칸 */ }
+}
+function wireMoney(ids) {
+  for (const id of ids) {
+    const el = $(id);
+    if (!el) continue;
+    el.type = "text";
+    el.inputMode = "numeric";
+    el.autocomplete = "off";
+    if (el.value) formatMoneyInput(el);
+    el.addEventListener("input", () => { formatMoneyInput(el); render(); });
+  }
+}
+
+/* ── 예시 값 — 예시인 줄 모르는 것이 위험하다 ─────────────── */
+function wireSample(clearIds) {
+  const bar = $("samplebar");
+  if (!bar) return;
+  const hide = () => { bar.hidden = true; };
+  document.querySelectorAll(".calc input, .calc select").forEach(
+    el => el.addEventListener("input", hide, { once: true }));
+  $("clearsample").addEventListener("click", () => {
+    for (const id of clearIds) { const el = $(id); if (el) el.value = ""; }
+    hide(); render();
+    const first = $(clearIds[0]); if (first) first.focus();
+  });
+}
+
+
 function render() {
-  const o = { kind: $("kind").value, acq: $("acq").value, sale: $("sale").value, price: +$("price").value || 0,
-              gain: +$("gain").value || 0, one: $("one").checked, live: +$("live").value || 0, excl: $("excl").value };
+  const o = { kind: $("kind").value, acq: $("acq").value, sale: $("sale").value, price: money("price"),
+              gain: money("gain"), one: $("one").checked, live: +$("live").value || 0, excl: $("excl").value };
   const r = evaluate(o);
   let rows = `<tr><td>보유기간</td><td>${o.acq || "?"} ~ ${o.sale || "?"}</td><td class="r num">${r.h}년</td><td class="quiet">제95조 제4항</td></tr>`;
   rows += `<tr><td>양도차익</td><td></td><td class="r num">${won(o.gain)}</td><td></td></tr>`;
@@ -187,6 +239,8 @@ function render() {
 }
 document.querySelectorAll(".calc input, .calc select").forEach(i => { i.addEventListener("input", render); i.addEventListener("change", render); });
 render();
+wireMoney(["price", "gain"]);
+wireSample(["price", "gain"]);
 
 /* 자체 검산 — 원문 표와 산식에서 끌어낸 정답지 */
 (function selfTest() {

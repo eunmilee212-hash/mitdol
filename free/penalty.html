@@ -8,7 +8,7 @@
 <meta name="description" content="부가가치세법 제60조 가산세(지연발급·미발급·전자세금계산서 전송·가공·위장·과다기재·합계표)와 국세기본법 제47조의3 과소신고·제47조의4 납부지연 가산세, 제48조 제2항 수정신고 감면을 원문 조항 그대로 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../style.css?v=20261011d">
+<link rel="stylesheet" href="../style.css?v=20261011e">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -32,6 +32,10 @@
     <p class="quiet" style="margin-top:14px">기준 법령 <span class="pill law">부가가치세법 (법률 제21218호, 2026. 1. 1. 시행)</span> <span class="pill law">국세기본법 (2026. 8. 11. 시행)</span> <span class="pill law">국세기본법 시행령 제27조의4</span> · 원문 대조 2026. 9. 15. · 자체 검산 → <span id="selftest">검산 중…</span></p>
   </div>
 
+  <div class="samplebar" id="samplebar">
+      <span><b>예시 숫자가 들어 있습니다.</b> 도구가 무엇을 하는지 바로 보시라고 넣어 둔 것입니다 &mdash; 그대로 두면 <b>예시 결과</b>입니다.</span>
+      <button type="button" id="clearsample">금액 비우기</button>
+    </div>
   <div class="calc split">
     <fieldset>
       <legend>① 세금계산서 가산세 — 부가가치세법 제60조</legend>
@@ -255,6 +259,54 @@ const DAILY = 22 / 100000; // 국세기본법 시행령 제27조의4 제1항
 
 /* 화면 */
 const $ = id => document.getElementById(id);
+
+/* ── 천 단위 쉼표 (2026-10-11) ──────────────────────────────
+   type="number" 는 쉼표를 받지 못해 text 로 두고 직접 찍는다.
+   커서가 튀지 않도록 **앞쪽 자릿수**를 세어 되돌린다. */
+const NUMF = new Intl.NumberFormat("ko-KR");
+const onlyDigits = v => String(v == null ? "" : v).replace(/[^0-9]/g, "");
+function money(id) { return +onlyDigits($(id).value) || 0; }
+function formatMoneyInput(el) {
+  const before = el.value;
+  const caret = (el.selectionStart == null) ? before.length : el.selectionStart;
+  const kept = onlyDigits(before.slice(0, caret)).length;
+  const d = onlyDigits(before);
+  el.value = d ? NUMF.format(+d) : "";
+  let seen = 0, pos = kept ? el.value.length : 0;
+  if (kept) {
+    for (let i = 0; i < el.value.length; i++) {
+      if (el.value.charCodeAt(i) >= 48 && el.value.charCodeAt(i) <= 57) seen++;
+      if (seen === kept) { pos = i + 1; break; }
+    }
+  }
+  try { el.setSelectionRange(pos, pos); } catch (e) { /* 숨은 칸 */ }
+}
+function wireMoney(ids) {
+  for (const id of ids) {
+    const el = $(id);
+    if (!el) continue;
+    el.type = "text";
+    el.inputMode = "numeric";
+    el.autocomplete = "off";
+    if (el.value) formatMoneyInput(el);
+    el.addEventListener("input", () => { formatMoneyInput(el); render(); });
+  }
+}
+
+/* ── 예시 값 — 예시인 줄 모르는 것이 위험하다 ─────────────── */
+function wireSample(clearIds) {
+  const bar = $("samplebar");
+  if (!bar) return;
+  const hide = () => { bar.hidden = true; };
+  document.querySelectorAll(".calc input, .calc select").forEach(
+    el => el.addEventListener("input", hide, { once: true }));
+  $("clearsample").addEventListener("click", () => {
+    for (const id of clearIds) { const el = $(id); if (el) el.value = ""; }
+    hide(); render();
+    const first = $(clearIds[0]); if (first) first.focus();
+  });
+}
+
 const box = $("reasons");
 function drawReasons() {
   const issued = $("issued").value, checked = new Set([...box.querySelectorAll("input:checked")].map(i => i.dataset.r));
@@ -269,11 +321,11 @@ function drawReasons() {
   box.querySelectorAll("input").forEach(i => i.addEventListener("change", render));
 }
 function render() {
-  const supply = +$("supply").value || 0, issued = $("issued").value;
+  const supply = money("supply"), issued = $("issued").value;
   const reasons = [...box.querySelectorAll("input:checked")].map(i => i.dataset.r);
   const p = itemPenalty(supply, reasons, issued);
-  const understated = +$("understated").value || 0, fraud = +$("fraud").value || 0, zeroBase = +$("zeroBase").value || 0;
-  const unpaid = $("unpaid").value === "" ? understated : (+$("unpaid").value || 0);
+  const understated = money("understated"), fraud = money("fraud"), zeroBase = money("zeroBase");
+  const unpaid = $("unpaid").value.trim() === "" ? understated : money("unpaid");
   const due = $("due").value, amend = $("amend").value;
   let ur;
   try { ur = underreport(understated, fraud, $("offshore").checked, zeroBase); }
@@ -325,6 +377,8 @@ function render() {
 $("issued").addEventListener("input", () => { drawReasons(); render(); });
 document.querySelectorAll(".calc input:not([data-r])").forEach(i => i.addEventListener("input", render));
 drawReasons(); render();
+wireMoney(["supply", "understated", "fraud", "zeroBase", "unpaid"]);
+wireSample(["supply", "understated", "fraud", "zeroBase", "unpaid"]);
 
 /* 자체 검산 — 원문에서 직접 끌어낸 정답지. 하나라도 틀리면 계산기를 믿지 말라고 표시한다. */
 (function selfTest() {
