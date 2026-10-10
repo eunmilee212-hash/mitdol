@@ -223,7 +223,7 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 .calc fieldset { min-width: 0; border: 0; border-top: 1px solid var(--ink); padding: 14px 0 6px; background: transparent; }
 .calc legend { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--ink); padding: 0 12px 0 0; }
 .calc label.row { display: grid; grid-template-columns: 250px 1fr; gap: 14px; align-items: center; margin: 10px 0; font-size: 14.5px; color: var(--ink-2); }
-.calc input[type=number], .calc input[type=date] {
+.calc input:not([type=checkbox]):not([type=radio]), .calc input[type=date] {
   width: 100%; max-width: 260px; padding: 8px 10px; border: 1px solid var(--line-2);
   font: inherit; font-size: 14.5px; font-variant-numeric: tabular-nums;
   text-align: right; color: var(--ink); background: var(--surface);
@@ -301,11 +301,13 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 .calc label.row { grid-template-columns: 250px minmax(0, 1fr); gap: 14px; margin: 16px 0;
   font-size: 15px; align-items: center; }
 .calc label.row > span { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
-.calc input[type=number], .calc input[type=date], .calc select {
+/* 쉼표를 찍으려고 금액 칸을 text 로 바꾸면서(2026-10-11) type=number 선택자가
+   안 걸려 칸이 끝까지 늘어났다. 체크·라디오만 빼고 모두 같은 규칙으로 묶는다. */
+.calc input:not([type=checkbox]):not([type=radio]), .calc select {
   max-width: 420px; padding: 11px 13px; font-size: 16px; }
 .calc.split label.row { grid-template-columns: minmax(0, 1fr); gap: 7px; margin: 18px 0;
   align-items: start; }
-.calc.split input[type=number], .calc.split input[type=date],
+.calc.split input:not([type=checkbox]):not([type=radio]),
 .calc.split select { max-width: none; }
 
 /* 표 — 세 칸짜리 조문 표가 덩어리로 보인다. 줄을 띄운다 */
