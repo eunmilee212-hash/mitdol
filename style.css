@@ -251,6 +251,27 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 .result .part > .quiet { margin-top: 10px; }
 .result .sum { margin-top: 40px; padding-top: 24px; border-top: 2px solid var(--ink); }
 .result .sum .quiet { margin-top: 6px; }
+
+/* ①②를 왼쪽·오른쪽으로 (2026-10-10) — 입력·결과·조문·한계 넷이 같은 자리에서
+   같은 쪽을 가리킨다. 눈이 한 번 익으면 아래로 쭉 같은 규칙으로 읽힌다. */
+.calc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 36px; align-items: start; }
+.calc > .result, .calc > .note { grid-column: 1 / -1; }
+.result { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; }
+.result .part + .part { margin-top: 0; padding-top: 0; border-top: 0;
+  border-left: 1px solid var(--line); padding-left: 36px; }
+.result .sum { grid-column: 1 / -1; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 36px; align-items: start; }
+.pair > .col + .col { border-left: 1px solid var(--line); padding-left: 36px; }
+.colh { font-size: 17px; margin-bottom: 14px; }
+.colh small { font-weight: 400; font-size: 13.5px; color: var(--muted); margin-left: 8px; }
+
+@media (max-width: 860px) {
+  /* 좁은 화면에서는 위아래로 쌓는다 — 왼쪽·오른쪽이 무너지면 줄만 길어진다 */
+  .calc, .result, .pair { grid-template-columns: minmax(0, 1fr); }
+  .result .part + .part, .pair > .col + .col {
+    border-left: 0; padding-left: 0; margin-top: 34px; padding-top: 28px;
+    border-top: 1px solid var(--line); }
+}
 tr.off td { color: var(--muted); text-decoration: line-through; }
 tr.off td.why { text-decoration: none; color: var(--warn); font-size: 12.5px; }
 

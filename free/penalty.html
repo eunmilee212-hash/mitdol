@@ -8,7 +8,7 @@
 <meta name="description" content="부가가치세법 제60조 가산세(지연발급·미발급·전자세금계산서 전송·가공·위장·과다기재·합계표)와 국세기본법 제47조의3 과소신고·제47조의4 납부지연 가산세, 제48조 제2항 수정신고 감면을 원문 조항 그대로 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../style.css?v=20261010e">
+<link rel="stylesheet" href="../style.css?v=20261010f">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -66,9 +66,12 @@
       <h2>이 계산기가 따르는 조문</h2>
       <p>계산에 쓴 율과 배제 규칙을 원문 그대로 옮겨 둡니다. 결과가 이상하면 이 표와 원문을 대조하십시오.</p>
     </div>
-    <div class="table-scroll"><table class="grid">
-      <thead><tr><th>규칙</th><th>근거</th><th>내용</th></tr></thead>
-      <tbody>
+    <div class="pair">
+      <div class="col">
+        <h3 class="colh">① 세금계산서 가산세 <small>부가가치세법 제60조</small></h3>
+        <div class="table-scroll"><table class="grid">
+        <thead><tr><th>규칙</th><th>근거</th><th>내용</th></tr></thead>
+        <tbody>
         <tr><td>같은 항 안의 배제</td><td>부가가치세법 제60조 제2항 후단</td><td>제1호(지연발급)·제2호(미발급)가 적용되는 부분은 제3호~제5호(지연전송·미전송·부실기재)를 적용하지 않고, 제5호(부실기재)가 적용되는 부분은 제3호·제4호를 적용하지 않는다</td></tr>
         <tr><td>항 사이의 배제</td><td>같은 조 제9항 제1호</td><td>제1항(미등록)이 적용되는 부분 → 제2항(제2호 제외)·제5항·제6항 배제</td></tr>
         <tr><td></td><td>같은 조 제9항 제2호</td><td>제2항(제2호 제외)이 적용되는 부분 → 제6항(매출처별 합계표) 배제</td></tr>
@@ -76,23 +79,46 @@
         <tr><td></td><td>같은 조 제9항 제4호</td><td>제3항 제3호(위장발급)가 적용되는 부분 → 제2항 제2호 <b>본문</b>(미발급 2%) 배제. 단서(1%)는 배제되지 않는다</td></tr>
         <tr><td></td><td>같은 조 제9항 제5호</td><td>제3항 제5호(과다기재 발급)가 적용되는 부분 → 제2항 제5호 본문(부실기재) 배제</td></tr>
         <tr><td>가공 세금계산서 4%</td><td>같은 조 제3항 제1호·제2호, 부칙(법률 제21218호) 제3조</td><td>2026. 1. 1. 이후 발급·수취분은 4%, 그 전 발급·수취분은 종전 3%</td></tr>
-        <tr><td>과소신고</td><td>국세기본법 제47조의3 제1항</td><td>과소신고납부세액등의 10%(제2호). 부정행위 부분은 40%, 역외거래는 60%(제1호 가목), 나머지는 10%(나목)</td></tr>
+        </tbody>
+      </table></div>
+      </div>
+      <div class="col">
+        <h3 class="colh">② 신고·납부 가산세 <small>국세기본법</small></h3>
+        <div class="table-scroll"><table class="grid">
+        <thead><tr><th>규칙</th><th>근거</th><th>내용</th></tr></thead>
+        <tbody><tr><td>과소신고</td><td>국세기본법 제47조의3 제1항</td><td>과소신고납부세액등의 10%(제2호). 부정행위 부분은 40%, 역외거래는 60%(제1호 가목), 나머지는 10%(나목)</td></tr>
         <tr><td>영세율 과세표준</td><td>같은 조 제2항 제2호</td><td>과소신고·무신고한 영세율과세표준의 0.5%를 더한다</td></tr>
         <tr><td>수정신고 감면</td><td>국세기본법 제48조 제2항 제1호</td><td>법정신고기한이 지난 후 1개월 이내 90% · 3개월 이내 75% · 6개월 이내 50% · 1년 이내 30% · 1년 6개월 이내 20% · 2년 이내 10%. 기간은 민법에 따라 셉니다(국세기본법 제4조, 민법 제157조·제160조·제161조). 계산기는 말일이 주말인 경우만 늦추고 공휴일은 반영하지 않습니다</td></tr>
         <tr><td>납부지연</td><td>국세기본법 제47조의4 제1항 제1호, 같은 법 시행령 제27조의4 제1항</td><td>미납세액 × 법정납부기한의 다음 날부터 납부일의 전날까지의 일수 × 1일 10만분의 22</td></tr>
-      </tbody>
-    </table></div>
+        </tbody>
+      </table></div>
+      </div>
+    </div>
   </section>
 
   <section>
     <div class="sechead">
       <h2>이 계산기가 하지 않는 것</h2>
     </div>
-    <div class="items">
+    <div class="pair">
+      <div class="col">
+        <h3 class="colh">① 세금계산서 가산세 <small>부가가치세법 제60조</small></h3>
+        <div class="items">
       <div class="item"><div class="nm">부실기재 가산세의 예외</div><div class="ds">필요적 기재사항이 착오로 틀렸어도 나머지 기재사항으로 거래사실이 확인되면 부실기재로 보지 않습니다(부가가치세법 제60조 제2항 제5호 단서, 같은 법 시행령 제108조 제3항). 해당 여부는 사실 판단이라 계산기가 정하지 않습니다.</div></div>
       <div class="item"><div class="nm">매입세액 불공제</div><div class="ds">세금계산서를 받지 못했거나 필요적 기재사항이 틀린 매입세액은 가산세가 아니라 <b>공제 자체가 안 됩니다</b>(부가가치세법 제39조 제1항 제2호). 다만 공급시기가 속하는 과세기간의 확정신고기한까지 받았거나(시행령 제75조 제3호), 그 기한 다음 날부터 1년 이내에 받아 수정신고·경정청구와 함께 제출하면(같은 조 제7호) 공제되고, 대신 0.5% 가산세가 붙습니다(법 제60조 제7항 제1호, 시행령 제108조 제5항). 불공제 세액은 ②의 과소신고 납부세액에 넣으십시오.</div></div>
       <div class="item"><div class="nm">계산서 가산세와의 조정</div><div class="ds">법인세법 제75조의6 제2항 제3호 또는 소득세법 제81조의9 제2항 제3호의 가산세를 받는 부분에는 부가가치세법 제60조 제2항 제2호·제6항 제2호를 적용하지 않습니다(같은 조 제10항). 반영하지 않았습니다.</div></div>
       <div class="item"><div class="nm">가산세 한도</div><div class="ds">의무위반 종류별 한도 5천만원(중소기업이 아닌 기업은 1억원)을 반영하지 않았습니다(국세기본법 제49조 제1항). 한도는 부가가치세법 제60조 제1항, 제2항 제1호·제3호~제5호, 제5항~제8항에만 걸리고 <b>미발급(제2항 제2호)과 가공·위장·과다기재(제3항)에는 없으며</b>, 고의로 위반한 경우에도 적용되지 않습니다.</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <h3 class="colh">② 신고·납부 가산세 <small>국세기본법</small></h3>
+        <div class="items">
+      <div class="item"><div class="nm">무신고</div><div class="ds">법정신고기한까지 신고하지 않은 경우의 <b>무신고가산세</b>는 계산하지 않습니다(국세기본법 제47조의2 제1항 &mdash; 부정행위 40%, 역외거래 부정행위 60%, 그 밖 20%). 이 계산기는 <b>신고는 했는데 적게 한 경우</b>(과소신고)만 봅니다.</div></div>
+      <div class="item"><div class="nm">경정할 것을 미리 알고 한 수정신고</div><div class="ds">수정신고 감면은 <b>&ldquo;과세표준과 세액을 경정할 것을 미리 알고 과세표준수정신고서를 제출한 경우는 제외&rdquo;</b>합니다(국세기본법 제48조 제2항 제1호 괄호). 조사 통지를 받은 뒤에 낸 것인지는 사실 판단이라 계산기가 정하지 않습니다 &mdash; 해당하면 감면이 없습니다.</div></div>
+      <div class="item"><div class="nm">기한 후 신고 감면</div><div class="ds">법정신고기한까지 신고하지 않고 나중에 기한후과세표준신고서를 낸 경우의 감면(국세기본법 제48조 제2항 제2호)은 반영하지 않았습니다. 위 무신고와 같은 갈래입니다.</div></div>
+      <div class="item"><div class="nm">정당한 사유 등 불부과</div><div class="ds">기한 연장 사유에 해당하거나 <b>의무를 이행하지 않은 데 정당한 사유</b>가 있으면 가산세를 부과하지 않습니다(국세기본법 제48조 제1항). 해당 여부는 사실 판단이라 계산기가 정하지 않습니다.</div></div>
+        </div>
+      </div>
     </div>
       <p class="hint" style="margin-top:14px"><b>유료 도구에서는 합니다.</b> 위 항목은 무료 계산기에서만 빠진 것입니다 &mdash; 설치형 도구는 가산세 한도(국세기본법 제49조)와 계산서 가산세와의 조정(부가가치세법 제60조 제10항)까지 계산합니다. 다만 <b>사실판단</b>(1세대 판정, 비사업용 토지 해당 여부, 증빙으로 자기자본을 확인할 수 있는지 등)은 유료 도구도 하지 않습니다. 그 자리는 서명하는 분의 몫입니다.</p>
     <div class="actions" style="margin-top:22px"><a class="btn solid" href="mailto:eunmilee212@gmail.com?subject=%EC%B2%B4%ED%97%98%ED%8C%90%20%EC%9A%94%EC%B2%AD">부가세 대사 도구 체험판</a><a class="btn ghost" href="./">다른 무료 도구 · 글</a></div>
