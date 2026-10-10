@@ -8,7 +8,7 @@
 <meta name="description" content="부가가치세법 제60조 가산세(지연발급·미발급·전자세금계산서 전송·가공·위장·과다기재·합계표)와 국세기본법 제47조의3 과소신고·제47조의4 납부지연 가산세, 제48조 제2항 수정신고 감면을 원문 조항 그대로 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="../style.css?v=20261010d">
+<link rel="stylesheet" href="../style.css?v=20261010e">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -250,18 +250,38 @@ function render() {
 
   const rows = p.items.map(it => `<tr class="${it.on ? "" : "off"}"><td>${it.name}</td><td>${VAT} ${it.cite}</td><td class="r num">${pctText(it.rate)}</td><td class="r num">${won(it.amt)}</td><td class="why quiet">${it.note}</td></tr>`).join("");
   const urNote = [fraud ? `부정 ${won(fraud)} × ${Math.round(ur.fr * 100)}% (제1항 제1호 가목)` : "", `${fraud ? "나머지" : "과소신고 납부세액"} ${won(understated - fraud)} × 10% (제1항 ${fraud ? "제1호 나목" : "제2호"})`, ur.zeroPart ? `영세율과세표준 × 0.5% ${won(ur.zeroPart)} (제2항 제2호)` : ""].filter(Boolean).join(" · ");
+  const basic = ur.total - relieved + late;      // ② 국세기본법 소계
   $("result").innerHTML = `
-    <div class="big">${won(total)} 원 <small>가산세 합계 (제60조 + 과소신고 감면 후 + 납부지연)</small></div>
-    <div class="table-scroll" style="margin-top:12px"><table class="grid">
-      <thead><tr><th>사유</th><th>근거</th><th class="r">율</th><th class="r">가산세</th><th>비고</th></tr></thead>
-      <tbody>
-        ${rows || `<tr><td colspan="5" class="quiet">①에서 사유를 고르면 부가가치세법 제60조 가산세가 여기 나옵니다.</td></tr>`}
-        <tr><td colspan="3"><b>부가가치세법 제60조 소계</b>${p.excludedCount ? ` <span class="pill mid">중복 배제 ${p.excludedCount}건</span>` : ""}</td><td class="r num"><b>${won(p.total)}</b></td><td></td></tr>
-        <tr><td>과소신고</td><td>국세기본법 제47조의3</td><td class="r num"></td><td class="r num">${won(ur.total)}</td><td>${urNote}</td></tr>
-        <tr><td>　수정신고 감면</td><td>국세기본법 제48조 제2항 제1호${relief.mok ? " " + relief.mok : ""}</td><td class="r num">${Math.round(relief.rate * 100)}%</td><td class="r num">−${won(relieved)}</td><td>${relief.label}</td></tr>
-        <tr><td>납부지연</td><td>국세기본법 제47조의4 제1항 제1호</td><td class="r num">${days}일</td><td class="r num">${won(late)}</td><td>${won(unpaid)} × ${days}일 × 10만분의 22 (시행령 제27조의4 제1항) · 감면 없음</td></tr>
-        <tr><td colspan="3"><b>합계</b></td><td class="r num"><b>${won(total)}</b></td><td></td></tr>
-      </tbody></table></div>`;
+    <div class="part">
+      <h3>① 세금계산서 가산세 <small>부가가치세법 제60조</small></h3>
+      <div class="big">${won(p.total)} 원${p.excludedCount ? ` <span class="pill mid">중복 배제 ${p.excludedCount}건</span>` : ""}</div>
+      <div class="table-scroll"><table class="grid">
+        <thead><tr><th>사유</th><th>근거</th><th class="r">율</th><th class="r">가산세</th><th>비고</th></tr></thead>
+        <tbody>
+          ${rows || `<tr><td colspan="5" class="quiet">①에서 사유를 고르면 여기 나옵니다.</td></tr>`}
+          <tr class="total"><td colspan="3"><b>소계</b></td><td class="r num"><b>${won(p.total)}</b></td><td></td></tr>
+        </tbody></table></div>
+      <p class="quiet">배제된 사유는 줄을 긋고 어느 조항 때문에 빠졌는지 적었습니다(제2항 후단 · 제9항). <b>이 가산세에는 수정신고 감면이 없습니다.</b></p>
+    </div>
+
+    <div class="part">
+      <h3>② 신고·납부 가산세 <small>국세기본법</small></h3>
+      <div class="big">${won(basic)} 원</div>
+      <div class="table-scroll"><table class="grid">
+        <thead><tr><th>항목</th><th>근거</th><th class="r">율 · 일수</th><th class="r">가산세</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>과소신고</td><td>국세기본법 제47조의3</td><td class="r num"></td><td class="r num">${won(ur.total)}</td><td class="why quiet">${urNote}</td></tr>
+          <tr><td>　수정신고 감면</td><td>국세기본법 제48조 제2항 제1호${relief.mok ? " " + relief.mok : ""}</td><td class="r num">${Math.round(relief.rate * 100)}%</td><td class="r num">−${won(relieved)}</td><td class="why quiet">${relief.label}</td></tr>
+          <tr><td>납부지연</td><td>국세기본법 제47조의4 제1항 제1호</td><td class="r num">${days}일</td><td class="r num">${won(late)}</td><td class="why quiet">${won(unpaid)} × ${days}일 × 10만분의 22 (시행령 제27조의4 제1항)</td></tr>
+          <tr class="total"><td colspan="3"><b>소계</b></td><td class="r num"><b>${won(basic)}</b></td><td></td></tr>
+        </tbody></table></div>
+      <p class="quiet"><b>감면은 과소신고에만 걸립니다</b>(제48조 제2항 제1호). 납부지연은 감면되지 않습니다 — 빨리 수정신고하면 다 깎인다는 말은 실무에서 흔한 오해입니다.</p>
+    </div>
+
+    <div class="sum">
+      <div class="big">${won(total)} 원 <small>① + ② 합계</small></div>
+      <div class="quiet">① 제60조 ${won(p.total)} + ② 국세기본법 ${won(basic)}</div>
+    </div>`;
 }
 $("issued").addEventListener("input", () => { drawReasons(); render(); });
 document.querySelectorAll(".calc input:not([data-r])").forEach(i => i.addEventListener("input", render));

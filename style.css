@@ -241,6 +241,16 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 .result { border-top: 2px solid var(--ink); border-bottom: 3px double var(--ink); padding: 20px 0 22px; }
 .result .big { font-family: var(--serif); font-size: 34px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
 .result .big small { font-family: var(--sans); font-size: 14px; color: var(--muted); font-weight: 400; margin-left: 10px; }
+
+/* 결과를 ①② 로 가른다 (2026-10-10) — 근거 법률도 감면 규칙도 다르다 */
+.result .part + .part { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+.result .part h3 { font-size: 18px; margin-bottom: 10px; }
+.result .part h3 small { font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 8px; }
+.result .part .big { font-size: 28px; }
+.result .part .table-scroll { margin-top: 12px; }
+.result .part > .quiet { margin-top: 10px; }
+.result .sum { margin-top: 40px; padding-top: 24px; border-top: 2px solid var(--ink); }
+.result .sum .quiet { margin-top: 6px; }
 tr.off td { color: var(--muted); text-decoration: line-through; }
 tr.off td.why { text-decoration: none; color: var(--warn); font-size: 12.5px; }
 
