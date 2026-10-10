@@ -58,13 +58,15 @@ b, strong { font-weight: 700; color: var(--ink); }
 
 /* ── 머리 — 보고서 표지의 머리처럼 ───────────────────────── */
 /* 머리말은 스크롤에도 붙어 있는다 — 문의 단추가 늘 보여야 한다 (2026-10-10) */
-header.top { background: rgba(255,255,255,.86); border-top: 6px solid var(--ink);
+/* 선은 하나다 (2026-10-10). 종전에는 위에 화면 끝까지 가는 6px 검은 띠,
+   아래에 본문 폭에서 끊기는 3px 겹줄이 있었다 — 폭도 굵기도 달라 어긋나 보였고
+   문의 단추가 아래 선 밖으로 삐져나온 것처럼 읽혔다. */
+header.top { background: rgba(255,255,255,.86); border-bottom: 1px solid var(--line);
   position: sticky; top: 0; z-index: 50;
   backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); }
 header.top .wrap {
   display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;
-  padding-top: 16px; padding-bottom: 12px;
-  border-bottom: 3px double var(--ink);
+  min-height: 68px; padding-top: 12px; padding-bottom: 12px;
 }
 .brand { font-weight: 800; font-size: 20px; letter-spacing: -0.03em; color: var(--ink); }
 .brand:hover { text-decoration: none; }
