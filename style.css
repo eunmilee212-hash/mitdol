@@ -357,6 +357,22 @@ footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space
 .samplebar button:hover { background: var(--warn); color: #fff; }
 .samplebar[hidden] { display: none; }
 
+/* 시범 사용 (2026-10-11) */
+.callout.pilot { border-left-color: var(--ink); }
+.callout.pilot .deal { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 36px; margin: 24px 0 20px; }
+.callout.pilot .deal > div + div { border-left: 1px solid var(--line-2); padding-left: 36px; }
+.callout.pilot .deal .k { font-size: 12.5px; font-weight: 600; letter-spacing: .12em;
+  color: var(--brand); padding-bottom: 8px; margin-bottom: 10px;
+  border-bottom: 1px solid var(--ink); }
+.callout.pilot .deal p { font-size: 15.5px; line-height: 1.8; color: var(--ink-2); }
+.callout.pilot .quiet { margin-top: 4px; }
+@media (max-width: 760px) {
+  .callout.pilot .deal { grid-template-columns: minmax(0, 1fr); }
+  .callout.pilot .deal > div + div { border-left: 0; padding-left: 0; margin-top: 22px;
+    padding-top: 20px; border-top: 1px solid var(--line-2); }
+}
+
 tr.off td { color: var(--muted); text-decoration: line-through; }
 tr.off td.why { text-decoration: none; color: var(--warn); font-size: 12.5px; }
 
